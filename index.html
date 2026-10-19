@@ -1,769 +1,448 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0e0e0d">
+  <meta name="description" content="Gabriel Buarque — AI builder, CTO e cofundador da IndiqAI. Tecnologia, produto, inteligência artificial e pesquisa.">
+  <meta property="og:title" content="Gabriel Buarque — AI builder">
+  <meta property="og:description" content="CTO e cofundador da IndiqAI. Construo produtos e sistemas com inteligência artificial.">
+  <meta property="og:url" content="https://nnex.us">
+  <link rel="canonical" href="https://nnex.us">
+  <title>Gabriel Buarque — AI builder</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0e0d'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' text-anchor='middle' fill='%23f28b54'%3EGB%3C/text%3E%3C/svg%3E">
 
-    <title>Gabriel Buarque - Portfólio</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <style>
+    :root {
+      --bg: #0e0e0d;
+      --surface: #161614;
+      --surface-2: #1d1d1a;
+      --text: #f2f0ea;
+      --muted: #9a978f;
+      --faint: #5d5b55;
+      --border: #272724;
+      --accent: #f28b54;
+      --accent-soft: rgba(242, 139, 84, .12);
+      --l0: #1d1d1a; --l1: #4a2d1c; --l2: #8a4c2a; --l3: #c76c3a; --l4: #f28b54;
+      --max: 1120px;
+      --sans: "Geist", system-ui, sans-serif;
+      --mono: "Geist Mono", ui-monospace, monospace;
+      --serif: "Instrument Serif", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: var(--sans); -webkit-font-smoothing: antialiased; line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+    ::selection { background: var(--accent); color: var(--bg); }
+    h1, h2, h3, p { margin: 0; }
+    .wrap { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
+    .mono { font-family: var(--mono); }
+    .skip { position: absolute; left: 16px; top: -100px; padding: 10px 16px; background: var(--accent); color: var(--bg); z-index: 100; }
+    .skip:focus { top: 16px; }
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    /* header */
+    header { position: sticky; top: 0; z-index: 50; background: rgba(14,14,13,.8); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--mono); font-weight: 500; font-size: 15px; letter-spacing: -.02em; }
+    .logo i { color: var(--accent); font-style: normal; }
+    nav { display: flex; gap: 28px; align-items: center; }
+    nav a { font-size: 13px; color: var(--muted); transition: color .2s; }
+    nav a:hover { color: var(--text); }
+    .status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #5fd08a; box-shadow: 0 0 0 0 rgba(95,208,138,.5); animation: pulse 2.4s infinite; }
+    @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(95,208,138,0); } 100% { box-shadow: 0 0 0 0 rgba(95,208,138,0); } }
 
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    /* hero */
+    .hero { padding: 120px 0 90px; position: relative; }
+    .hero::before {
+      content: ""; position: absolute; inset: -80px 0 auto 40%; height: 520px; pointer-events: none;
+      background: radial-gradient(closest-side, rgba(242,139,84,.13), transparent);
+    }
+    .tag { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .tag::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
+    h1 {
+      margin: 28px 0 32px; font-weight: 400; font-size: clamp(56px, 10vw, 128px);
+      line-height: .95; letter-spacing: -.045em;
+    }
+    h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent); letter-spacing: -.02em; }
+    .lede { max-width: 620px; font-size: clamp(18px, 2vw, 21px); color: var(--muted); font-weight: 300; line-height: 1.65; }
+    .lede b { color: var(--text); font-weight: 500; }
+    .cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 500; border: 1px solid var(--border); transition: all .2s; }
+    .btn:hover { border-color: var(--muted); }
+    .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .btn.primary:hover { background: var(--accent); border-color: var(--accent); }
 
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    /* sections */
+    section { padding: 96px 0; border-top: 1px solid var(--border); scroll-margin-top: 64px; }
+    .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
+    .idx { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+    h2 { font-weight: 400; font-size: clamp(34px, 5vw, 56px); letter-spacing: -.04em; line-height: 1.08; max-width: 760px; }
+    h2 em { font-family: var(--serif); font-style: italic; color: var(--accent); }
 
-    <!-- =======================================================
-  * Template Name: iPortfolio
-  * Updated: Jul 27 2023 with Bootstrap v5.3.1
-  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    /* bento projects */
+    .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+    .card {
+      grid-column: span 3; padding: 32px; border: 1px solid var(--border); border-radius: 20px;
+      background: var(--surface); display: flex; flex-direction: column; min-height: 280px;
+      transition: border-color .25s, transform .25s, background .25s; position: relative; overflow: hidden;
+    }
+    .card:hover { border-color: #3a3a35; transform: translateY(-3px); background: var(--surface-2); }
+    .card.wide { grid-column: span 4; }
+    .card.narrow { grid-column: span 2; }
+    .chip { font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; align-self: flex-start; }
+    .card h3 { margin: 22px 0 12px; font-size: 26px; font-weight: 500; letter-spacing: -.03em; }
+    .card p { color: var(--muted); font-size: 15px; max-width: 420px; font-weight: 300; line-height: 1.7; }
+    .card .go { margin-top: auto; padding-top: 28px; font-size: 13px; font-weight: 500; color: var(--accent); display: inline-flex; gap: 6px; }
+    .card .go span { transition: transform .2s; }
+    .card:hover .go span { transform: translate(3px, -3px); }
+
+    /* github widget */
+    .gh { border: 1px solid var(--border); border-radius: 24px; background: var(--surface); overflow: hidden; }
+    .gh-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 28px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .gh-user { display: flex; align-items: center; gap: 14px; }
+    .gh-user img { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface-2); }
+    .gh-user strong { display: block; font-weight: 500; font-size: 15px; }
+    .gh-user span { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .gh-sync { font-family: var(--mono); font-size: 11px; color: var(--faint); display: flex; align-items: center; gap: 8px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+    .stat { padding: 24px 28px; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: 0; }
+    .stat .n { font-size: 38px; font-weight: 300; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat .l { margin-top: 8px; font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .heat-wrap { padding: 26px 28px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+    .heat-meta { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 14px; gap: 16px; min-width: 520px; }
+    .heat { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 1fr); gap: 3px; min-width: 520px; }
+    .heat i { aspect-ratio: 1; border-radius: 2.5px; background: var(--l0); display: block; min-width: 8px; }
+    .heat i[data-l="1"] { background: var(--l1); } .heat i[data-l="2"] { background: var(--l2); }
+    .heat i[data-l="3"] { background: var(--l3); } .heat i[data-l="4"] { background: var(--l4); }
+    .legend { display: flex; align-items: center; gap: 4px; justify-content: flex-end; margin-top: 12px; font-family: var(--mono); font-size: 11px; color: var(--faint); }
+    .legend i { width: 10px; height: 10px; border-radius: 2px; display: block; }
+    .gh-cols { display: grid; grid-template-columns: 1.3fr 1fr; }
+    .gh-col { padding: 26px 28px; }
+    .gh-col + .gh-col { border-left: 1px solid var(--border); }
+    .gh-col h3 { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 18px; }
+    .feed { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .feed li { display: flex; gap: 12px; font-size: 14px; color: var(--muted); align-items: baseline; }
+    .feed li b { color: var(--text); font-weight: 500; }
+    .feed time { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--faint); white-space: nowrap; }
+    .feed .ic { font-family: var(--mono); color: var(--accent); font-size: 12px; width: 14px; flex: none; }
+    .bar { display: flex; height: 8px; border-radius: 99px; overflow: hidden; gap: 2px; margin-bottom: 18px; }
+    .bar span { display: block; min-width: 4px; }
+    .langs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .langs li { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .langs li i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    .langs li span { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .skeleton { color: var(--faint); font-family: var(--mono); font-size: 12px; }
+    .gh-err { padding: 40px 28px; text-align: center; color: var(--muted); font-size: 14px; }
+    .gh-foot { padding: 16px 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--faint); font-family: var(--mono); }
+    .gh-foot a { color: var(--accent); }
+
+    /* research / about */
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+    .two p { color: var(--muted); font-size: 18px; font-weight: 300; line-height: 1.8; }
+    .two p + p { margin-top: 20px; }
+    .meta { margin-top: 36px; display: grid; gap: 0; border-top: 1px solid var(--border); }
+    .meta div { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .meta dt { color: var(--muted); } .meta dd { margin: 0; font-family: var(--mono); font-size: 13px; }
+
+    /* contact */
+    .contact { padding: 120px 0; text-align: left; }
+    .contact h2 { font-size: clamp(44px, 8vw, 104px); max-width: none; }
+    .links { margin-top: 44px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 0; }
+    .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--faint); font-family: var(--mono); }
+
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      .card, .card.wide, .card.narrow { grid-column: span 6; min-height: 0; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .gh-cols, .two { grid-template-columns: 1fr; }
+      .gh-col + .gh-col { border-left: 0; border-top: 1px solid var(--border); }
+      .two { gap: 32px; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(calc(100% - 36px), var(--max)); }
+      nav a:not(.keep) { display: none; }
+      .hero { padding: 80px 0 64px; }
+      section { padding: 72px 0; }
+      .gh-top, .stat, .gh-col, .heat-wrap { padding-inline: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
-
 <body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-    <!-- ======= Mobile nav toggle button ======= -->
-    <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="logo" aria-label="Gabriel Buarque, início">gb<i>/</i>nnex.us</a>
+      <nav aria-label="Navegação principal">
+        <a href="#trabalho">Trabalho</a>
+        <a href="#github">GitHub</a>
+        <a href="#pesquisa">Pesquisa</a>
+        <a href="#contato" class="keep">Contato</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- ======= Header ======= -->
-    <header id="header">
-        <div class="d-flex flex-column">
+  <main id="conteudo">
+    <div class="wrap hero">
+      <div class="tag">AI builder · produto · tecnologia</div>
+      <h1>Gabriel<br><em>Buarque</em></h1>
+      <p class="lede">
+        <b>CTO e cofundador da IndiqAI.</b> Construo produtos e sistemas com
+        inteligência artificial, conectando tecnologia, produto e operação
+        para resolver problemas do mundo real.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#trabalho">Ver trabalho ↓</a>
+        <a class="btn" href="https://github.com/gabrielbuarque" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+    </div>
 
-            <div class="profile">
-                <img src="assets/img/profile-img.jpg" alt="" class="img-fluid rounded-circle">
-                <h1 class="text-light"><a href="index.html">Gabriel Buarque</a></h1>
-                <div class="social-links mt-3 text-center">
-                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                </div>
-            </div>
-
-            <nav id="navbar" class="nav-menu navbar">
-                <ul>
-                    <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i>
-                            <span>Home</span></a></li>
-                    <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Sobre</span></a>
-                    </li>
-                    <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i>
-                            <span>Curriculo</span></a></li>
-                    <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i>
-                            <span>Portfolio</span></a></li>
-                    <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i>
-                            <span>Serviços</span></a></li>
-                    <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i>
-                            <span>Contato</span></a></li>
-                </ul>
-            </nav><!-- .nav-menu -->
+    <section id="trabalho">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal">O que estou <em>construindo</em></h2>
+          <span class="idx">01 / trabalho</span>
         </div>
-    </header><!-- End Header -->
-
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-        <div class="hero-container" data-aos="fade-in">
-            <h1>Gabriel Buarque</h1>
-            <p>Sou <span class="typed" data-typed-items="Designer, Desenvolvedor, Fotográfo, Técnico em Jogos"></span>
-            </p>
+        <div class="bento">
+          <a class="card wide reveal" href="https://indiqai.com/" target="_blank" rel="noopener noreferrer">
+            <span class="chip">Cofundador · CTO</span>
+            <h3>IndiqAI</h3>
+            <p>Produto e tecnologia para transformar inteligência artificial em ferramentas úteis para negócios.</p>
+            <span class="go">Visitar <span>↗</span></span>
+          </a>
+          <a class="card narrow reveal" href="https://www.npmjs.com/package/n8n-nodes-difyai" target="_blank" rel="noopener noreferrer">
+            <span class="chip">open source · npm</span>
+            <h3>n8n-nodes-difyai</h3>
+            <p>Nós para integrar o Dify ao n8n.</p>
+            <span class="go">Ver no npm <span>↗</span></span>
+          </a>
         </div>
-    </section><!-- End Hero -->
-
-    <main id="main">
-
-        <!-- ======= About Section ======= -->
-        <section id="about" class="about">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Sobre</h2>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4" data-aos="fade-right">
-                        <img src="assets/img/profile-img.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-                        <h3>UI/UX Designer &amp; Web Developer.</h3>
-                        <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua.
-                        </p>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Data de Aniversário:</strong>
-                                        <span>11 de Agosto de 2005</span>
-                                    </li>
-
-
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Telefone:</strong> <span>+55 (84)
-                                            98188-2164
-                                        </span>
-                                    </li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Cidade:</strong> <span>Natal,
-                                            RN</span></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Idade:</strong> <span>18 anos</span>
-                                    </li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Formação:</strong>
-                                        <span>Técnico</span>
-                                    </li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong>
-                                        <span>buarquegabriel01@gmail.com</span>
-                                    </li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Cargo</strong>
-                                        <span>CEO da CompineStudio</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p>
-                            Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt
-                            adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore. Et eius omnis.
-                            Cupiditate ut dicta maxime officiis quidem quia. Sed et consectetur qui quia repellendus
-                            itaque neque. Aliquid amet quidem ut quaerat cupiditate. Ab et eum qui repellendus omnis
-                            culpa magni laudantium dolores.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </section><!-- End About Section -->
-
-        <!-- ======= Facts Section ======= -->
-        <section id="facts" class="facts">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Facts</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                </div>
-
-                <div class="row no-gutters">
-
-                    <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
-                        <div class="count-box">
-                            <i class="bi bi-emoji-smile"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p><strong>Happy Clients</strong> consequuntur quae</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="count-box">
-                            <i class="bi bi-journal-richtext"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p><strong>Projects</strong> adipisci atque cum quia aut</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="count-box">
-                            <i class="bi bi-headset"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p><strong>Hours Of Support</strong> aut commodi quaerat</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="count-box">
-                            <i class="bi bi-people"></i>
-                            <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1"
-                                class="purecounter"></span>
-                            <p><strong>Hard Workers</strong> rerum asperiores dolor</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section><!-- End Facts Section -->
-
-        <!-- ======= Skills Section ======= -->
-        <section id="skills" class="skills section-bg">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Skills</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                </div>
-
-                <div class="row skills-content">
-
-                    <div class="col-lg-6" data-aos="fade-up">
-
-                        <div class="progress">
-                            <span class="skill">HTML <i class="val">100%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress">
-                            <span class="skill">CSS <i class="val">90%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress">
-                            <span class="skill">JavaScript <i class="val">90%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-
-
-
-                        <div class="progress">
-                            <span class="skill">WordPress/CMS <i class="val">90%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress">
-                            <span class="skill">Photoshop <i class="val">100%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="109" aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </section><!-- End Skills Section -->
-
-        <!-- ======= Resume Section ======= -->
-        <section id="resume" class="resume">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Resume</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6" data-aos="fade-up">
-                        <h3 class="resume-title">Resumo</h3>
-                        <div class="resume-item pb-0">
-                            <h4>Gabriel Buarque</h4>
-                            <p><em>Designer Gráfico inovador e orientado para prazos com mais de 3 anos de experiência
-                                    em design e desenvolvimento de materiais de marketing digital/impresso centrados no
-                                    usuário, desde o conceito inicial até a entrega final e polida.</em></p>
-                            <ul>
-                                <li>127 Portland Street, Orlando, FL</li>
-                                <li>(123) 456-7891</li>
-                                <li>alice.barkley@example.com</li>
-                            </ul>
-                        </div>
-
-                        <h3 class="resume-title">Educação</h3>
-                        <div class="resume-item">
-                            <h4>Mestre em Belas Artes e Design Gráfico</h4>
-                            <h5>2015 - 2016</h5>
-                            <p><em>Instituto de Tecnologia de Rochester, Rochester, NY</em></p>
-                            <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero
-                                voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
-                        </div>
-                        <div class="resume-item">
-                            <h4>Bacharel em Belas Artes e Design Gráfico</h4>
-                            <h5>2010 - 2014</h5>
-                            <p><em>Instituto de Tecnologia de Rochester, Rochester, NY</em></p>
-                            <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel
-                                ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae
-                                consequatur neque etlon sader mart dila</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="resume-title">Experiência Profissional</h3>
-                        <div class="resume-item">
-                            <h4>Especialista Sênior em Design Gráfico</h4>
-                            <h5>2019 - Presente</h5>
-                            <p><em>Experion, Nova Iorque, NY</em></p>
-                            <ul>
-                                <li>Liderar o design, desenvolvimento e implementação dos materiais de comunicação
-                                    gráfica, layout e produção</li>
-                                <li>Delegar tarefas para os 7 membros da equipe de design e fornecer orientação em todos
-                                    os aspectos do projeto</li>
-                                <li>Supervisionar a avaliação de todos os materiais gráficos para garantir qualidade e
-                                    precisão do design</li>
-                                <li>Gerenciar o uso eficiente dos orçamentos de projetos de produção que variam de
-                                    $2.000 a $25.000</li>
-                            </ul>
-                        </div>
-                        <div class="resume-item">
-                            <h4>Especialista em Design Gráfico</h4>
-                            <h5>2017 - 2018</h5>
-                            <p><em>Stepping Stone Advertising, Nova Iorque, NY</em></p>
-                            <ul>
-                                <li>Desenvolveu inúmeros programas de marketing (logotipos, brochuras, infográficos,
-                                    apresentações e anúncios)</li>
-                                <li>Gerenciou até 5 projetos ou tarefas ao mesmo tempo sob pressão</li>
-                                <li>Recomendou e consultou os clientes sobre o design gráfico mais apropriado</li>
-                                <li>Criou mais de 4 apresentações e propostas de design por mês para clientes e gerentes
-                                    de contas</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </section><!-- End Resume Section -->
-
-        <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio section-bg">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Portfolio</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                </div>
-
-                <div class="row" data-aos="fade-up">
-                    <div class="col-lg-12 d-flex justify-content-center">
-                        <ul id="portfolio-flters">
-                            <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".filter-app">App</li>
-                            <li data-filter=".filter-card">Card</li>
-                            <li data-filter=".filter-web">Web</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section><!-- End Portfolio Section -->
-
-        <!-- ======= Services Section ======= -->
-        <section id="services" class="services">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Services</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-                        <div class="icon"><i class="bi bi-briefcase"></i></div>
-                        <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias
-                            excepturi sint occaecati cupiditate non provident</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon"><i class="bi bi-card-checklist"></i></div>
-                        <h4 class="title"><a href="">Dolor Sitema</a></h4>
-                        <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                            ex ea commodo consequat tarad limino ata</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
-                        <div class="icon"><i class="bi bi-bar-chart"></i></div>
-                        <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore eu fugiat nulla pariatur</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon"><i class="bi bi-binoculars"></i></div>
-                        <h4 class="title"><a href="">Magni Dolores</a></h4>
-                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                            deserunt mollit anim id est laborum</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon"><i class="bi bi-brightness-high"></i></div>
-                        <h4 class="title"><a href="">Nemo Enim</a></h4>
-                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                            praesentium voluptatum deleniti atque</p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
-                        <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-                        <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-                        <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero
-                            tempore, cum soluta nobis est eligendi</p>
-                    </div>
-                </div>
-
-            </div>
-        </section><!-- End Services Section -->
-        <main>
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Free</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$0<small
-                                    class="text-body-secondary fw-light">/mo</small></h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>10 users included</li>
-                                <li>2 GB of storage</li>
-                                <li>Email support</li>
-                                <li>Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Pro</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$15<small
-                                    class="text-body-secondary fw-light">/mo</small></h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>20 users included</li>
-                                <li>10 GB of storage</li>
-                                <li>Priority email support</li>
-                                <li>Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                        <div class="card-header py-3 text-bg-primary border-primary">
-                            <h4 class="my-0 fw-normal">Enterprise</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$29<small
-                                    class="text-body-secondary fw-light">/mo</small></h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>30 users included</li>
-                                <li>15 GB of storage</li>
-                                <li>Phone and email support</li>
-                                <li>Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="display-6 text-center mb-4">Compare plans</h2>
-
-            <div class="table-responsive">
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-                            <th style="width: 34%;"></th>
-                            <th style="width: 22%;">Free</th>
-                            <th style="width: 22%;">Pro</th>
-                            <th style="width: 22%;">Enterprise</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row" class="text-start">Public</th>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">Private</th>
-                            <td></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                        </tr>
-                    </tbody>
-
-                    <tbody>
-                        <tr>
-                            <th scope="row" class="text-start">Permissions</th>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">Sharing</th>
-                            <td></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">Unlimited members</th>
-                            <td></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-start">Extra security</th>
-                            <td></td>
-                            <td></td>
-                            <td><svg class="bi" width="24" height="24">
-                                    <use xlink:href="#check"></use>
-                                </svg></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
-
-
-        <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Contact</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                </div>
-
-                <div class="row" data-aos="fade-in">
-
-                    <div class="col-lg-12 d-flex align-items-stretch">
-                        <div class="info">
-                            <div class="address">
-                                <i class="bi bi-geo-alt"></i>
-                                <h4>Location:</h4>
-                                <p>A108 Adam Street, New York, NY 535022</p>
-                            </div>
-
-                            <div class="email">
-                                <i class="bi bi-envelope"></i>
-                                <h4>Email:</h4>
-                                <p>info@example.com</p>
-                            </div>
-
-                            <div class="phone">
-                                <i class="bi bi-phone"></i>
-                                <h4>Call:</h4>
-                                <p>+55 84 98188-2164</p>
-                            </div>
-
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3968.7400238479063!2d-35.19409098859882!3d-5.892101357982131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7b2f8c08d481f83%3A0x95d87e91149f3f80!2sR.%20Maca%C3%BAba%2C%2023%20-%20Nova%20Parnamirim%2C%20Parnamirim%20-%20RN%2C%2059152-140!5e0!3m2!1spt-BR!2sbr!4v1694065365909!5m2!1spt-BR!2sbr"
-                                width="100%" height="250px" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-
-            </div>
-        </section><!-- End Contact Section -->
-
-    </main><!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="container">
-            <div class="copyright">
-                &copy; Copyright <strong><span>iPortfolio</span></strong>
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
+      </div>
+    </section>
+
+    <section id="github">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal">Em público, <em>ao vivo</em></h2>
+          <span class="idx">02 / github</span>
         </div>
-    </footer><!-- End  Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+        <div class="gh reveal" id="gh" aria-live="polite">
+          <div class="gh-top">
+            <div class="gh-user">
+              <img id="gh-avatar" alt="" width="44" height="44" src="https://github.com/gabrielbuarque.png?size=88">
+              <div><strong id="gh-name">Gabriel Buarque</strong><span>@gabrielbuarque</span></div>
+            </div>
+            <div class="gh-sync"><span class="dot"></span><span id="gh-sync">sincronizando…</span></div>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="n" id="s-contrib">—</div><div class="l">contribuições / ano</div></div>
+            <div class="stat"><div class="n" id="s-repos">—</div><div class="l">repositórios</div></div>
+            <div class="stat"><div class="n" id="s-streak">—</div><div class="l">dias de sequência</div></div>
+            <div class="stat"><div class="n" id="s-follow">—</div><div class="l">seguidores</div></div>
+          </div>
+          <div class="heat-wrap">
+            <div class="heat-meta"><span id="heat-range">últimos 12 meses</span><span id="heat-best"></span></div>
+            <div class="heat" id="heat" role="img" aria-label="Gráfico de contribuições do último ano"></div>
+            <div class="legend">menos <i style="background:var(--l0)"></i><i style="background:var(--l1)"></i><i style="background:var(--l2)"></i><i style="background:var(--l3)"></i><i style="background:var(--l4)"></i> mais</div>
+          </div>
+          <div class="gh-cols">
+            <div class="gh-col">
+              <h3>Atividade recente</h3>
+              <ul class="feed" id="feed"><li class="skeleton">carregando…</li></ul>
+            </div>
+            <div class="gh-col">
+              <h3>Linguagens</h3>
+              <div class="bar" id="lang-bar"></div>
+              <ul class="langs" id="langs"><li class="skeleton">carregando…</li></ul>
+            </div>
+          </div>
+          <div class="gh-foot">
+            <span>dados públicos · API do GitHub</span>
+            <a href="https://github.com/gabrielbuarque" target="_blank" rel="noopener noreferrer">github.com/gabrielbuarque ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/typed.js/typed.umd.js"></script>
-    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <section id="pesquisa">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal">Construção e investigação <em>caminham juntas.</em></h2>
+          <span class="idx">03 / pesquisa &amp; sobre</span>
+        </div>
+        <div class="two">
+          <div class="reveal">
+            <p>Sou mestrando em Ciência, Tecnologia e Inovação pela UFRN. Minha pesquisa parte do encontro entre tecnologia, empreendedorismo e problemas concretos.</p>
+            <dl class="meta">
+              <div><dt>Hoje</dt><dd>CTO · IndiqAI</dd></div>
+              <div><dt>Mestrado</dt><dd>CTI · UFRN</dd></div>
+              <div><dt>Foco</dt><dd>IA aplicada · automação</dd></div>
+            </dl>
+          </div>
+          <div class="reveal">
+            <p>Do problema ao produto. Meu trabalho passa por arquitetura de software, automação e experimentação com IA.</p>
+            <p>Gosto de pegar questões ambíguas, encontrar o que realmente precisa ser resolvido e construir algo que possa ser usado, observado e melhorado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <section id="contato" class="contact">
+      <div class="wrap">
+        <div class="sec-head"><span class="idx">04 / contato</span></div>
+        <h2 class="reveal">Vamos construir <em>algo?</em></h2>
+        <div class="links">
+          <a class="btn primary" href="https://github.com/gabrielbuarque" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="btn" href="https://indiqai.com/" target="_blank" rel="noopener noreferrer">IndiqAI ↗</a>
+          <a class="btn" href="https://www.npmjs.com/package/n8n-nodes-difyai" target="_blank" rel="noopener noreferrer">npm ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
+  <footer>
+    <div class="wrap foot"><span>Gabriel Buarque</span><span>nnex.us · © 2026</span></div>
+  </footer>
+
+  <script>
+  (() => {
+    const USER = 'gabrielbuarque';
+    const $ = id => document.getElementById(id);
+    const LANG_COLORS = { TypeScript:'#3178c6', JavaScript:'#f1e05a', HTML:'#e34c26', CSS:'#a78bfa', Shell:'#89e051', Python:'#3572a5', Go:'#00add8', Rust:'#dea584' };
+    const TTL = 30 * 60 * 1000;
+
+    // reveal on scroll
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+    document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+    const cached = async (key, url) => {
+      try { const c = JSON.parse(localStorage.getItem(key)); if (c && Date.now() - c.t < TTL) return c.d; } catch (_) {}
+      const r = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+      try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d })); } catch (_) {}
+      return d;
+    };
+    const ago = iso => {
+      const s = (Date.now() - new Date(iso)) / 1000;
+      if (s < 3600) return Math.max(1, Math.round(s / 60)) + 'min';
+      if (s < 86400) return Math.round(s / 3600) + 'h';
+      if (s < 86400 * 30) return Math.round(s / 86400) + 'd';
+      return Math.round(s / 86400 / 30) + 'mês';
+    };
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+
+    function eventText(e) {
+      const repo = esc(e.repo.name.replace(USER + '/', ''));
+      const p = e.payload || {};
+      switch (e.type) {
+        case 'PushEvent': { const n = p.size || (p.commits || []).length || 1; return ['↑', `${n} commit${n > 1 ? 's' : ''} em <b>${repo}</b>`]; }
+        case 'CreateEvent': return ['+', `criou ${esc(p.ref_type)} em <b>${repo}</b>`];
+        case 'PullRequestEvent': return ['⇄', `${esc(p.action)} PR em <b>${repo}</b>`];
+        case 'IssuesEvent': return ['○', `${esc(p.action)} issue em <b>${repo}</b>`];
+        case 'WatchEvent': return ['★', `favoritou <b>${repo}</b>`];
+        case 'ForkEvent': return ['⑂', `fork de <b>${repo}</b>`];
+        default: return ['·', `${esc(e.type.replace('Event', ''))} em <b>${repo}</b>`];
+      }
+    }
+
+    function renderHeat(days) {
+      const heat = $('heat');
+      const first = new Date(days[0].date + 'T00:00:00').getDay();
+      let html = '<i style="visibility:hidden"></i>'.repeat(first);
+      days.forEach(d => { html += `<i data-l="${d.level}" title="${d.count} contribuições em ${d.date}"></i>`; });
+      heat.innerHTML = html;
+      const best = days.reduce((a, b) => b.count > a.count ? b : a, days[0]);
+      $('heat-best').textContent = best.count ? `melhor dia: ${best.count} em ${best.date.split('-').reverse().slice(0,2).join('/')}` : '';
+      let streak = 0;
+      for (let i = days.length - 1; i >= 0; i--) {
+        if (days[i].count > 0) streak++; else if (i === days.length - 1) continue; else break;
+      }
+      $('s-streak').textContent = streak;
+    }
+
+    // fallback: derive heat map from the last public events
+    function daysFromEvents(events) {
+      const map = {};
+      events.forEach(e => { const k = e.created_at.slice(0, 10); map[k] = (map[k] || 0) + (e.payload && e.payload.size || 1); });
+      const out = []; const today = new Date();
+      for (let i = 363; i >= 0; i--) {
+        const d = new Date(today - i * 864e5); const k = d.toISOString().slice(0, 10);
+        const c = map[k] || 0; out.push({ date: k, count: c, level: c === 0 ? 0 : c < 3 ? 1 : c < 6 ? 2 : c < 10 ? 3 : 4 });
+      }
+      return out;
+    }
+
+    async function load() {
+      try {
+        const [user, repos, events] = await Promise.all([
+          cached('gh:user', `https://api.github.com/users/${USER}`),
+          cached('gh:repos', `https://api.github.com/users/${USER}/repos?per_page=100&sort=pushed`),
+          cached('gh:events', `https://api.github.com/users/${USER}/events/public?per_page=30`)
+        ]);
+        $('gh-name').textContent = user.name || USER;
+        $('gh-avatar').src = user.avatar_url + '&s=88';
+        $('s-repos').textContent = user.public_repos;
+        $('s-follow').textContent = user.followers;
+
+        // feed
+        $('feed').innerHTML = events.slice(0, 6).map(e => {
+          const [ic, tx] = eventText(e);
+          return `<li><span class="ic">${ic}</span><span>${tx}</span><time>${ago(e.created_at)}</time></li>`;
+        }).join('') || '<li class="skeleton">sem atividade pública recente</li>';
+
+        // languages (by repo count, own repos only)
+        const counts = {};
+        repos.filter(r => !r.fork && r.language).forEach(r => counts[r.language] = (counts[r.language] || 0) + 1);
+        const total = Object.values(counts).reduce((a, b) => a + b, 0) || 1;
+        const langs = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+        const col = n => LANG_COLORS[n] || '#8b8982';
+        $('lang-bar').innerHTML = langs.map(([n, c]) => `<span style="flex:${c};background:${col(n)}" title="${esc(n)}"></span>`).join('');
+        $('langs').innerHTML = langs.map(([n, c]) => `<li><i style="background:${col(n)}"></i>${esc(n)}<span>${Math.round(c / total * 100)}%</span></li>`).join('');
+
+        $('gh-sync').textContent = 'sincronizado · ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+        // contributions
+        let days, exact = true;
+        try {
+          const c = await cached('gh:contrib', `https://github-contributions-api.jogruber.de/v4/${USER}?y=last`);
+          days = c.contributions;
+          $('s-contrib').textContent = (c.total && c.total.lastYear != null ? c.total.lastYear : days.reduce((a, d) => a + d.count, 0)).toLocaleString('pt-BR');
+        } catch (_) {
+          days = daysFromEvents(events); exact = false;
+          $('s-contrib').textContent = '≥' + days.reduce((a, d) => a + d.count, 0);
+          $('heat-range').textContent = 'eventos públicos recentes';
+        }
+        renderHeat(days);
+      } catch (err) {
+        $('gh').querySelector('.gh-cols').innerHTML = '<div class="gh-err" style="grid-column:1/-1">Não consegui carregar agora (limite da API). Veja direto em <a style="color:var(--accent)" href="https://github.com/' + USER + '">github.com/' + USER + '</a>.</div>';
+        $('gh-sync').textContent = 'indisponível';
+      }
+    }
+    load();
+  })();
+  </script>
 </body>
-
 </html>
