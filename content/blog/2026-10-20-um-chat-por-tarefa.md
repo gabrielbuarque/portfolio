@@ -64,7 +64,7 @@ Começar limpo tem um lado que pouca gente percebe: o chat novo não sabe nada a
 
 O pedido precisa dizer qual é o resultado esperado, de um jeito que a própria IA consiga conferir se chegou lá. Por isso cada chat recebeu um objetivo verificável: "liste os documentos exigidos", "liste os campos do formulário", "para cada campo, diga a resposta e de onde ela saiu".
 
-E para explicar bem o que você quer, falar costuma funcionar melhor do que digitar. Quando a gente digita, escreve um prompt curto. Quando fala, dá contexto sem perceber: o porquê, o que já tentou, o que não pode dar errado. Foi o que ela fez, no microfone. Eu uso muito o Wispr Flow para ditar exatamente por isso.
+E para explicar bem o que você quer, falar costuma funcionar melhor do que digitar. Quando a gente digita, escreve um prompt curto. Quando fala, dá contexto sem perceber: o porquê, o que já tentou, o que não pode dar errado. Foi o que ela fez, no microfone. Eu uso muito o [Wispr Flow](https://wisprflow.ai/) para ditar exatamente por isso.
 
 Com um objetivo claro em cada chat, sobra o último passo: conferir. E aqui a lógica do chat limpo aparece de novo. Em um estudo com 150 erros inseridos em textos e código, uma segunda revisão feita na mesma conversa achou menos erros do que uma revisão feita numa sessão nova, sem o histórico (F1 de 21,7% contra 28,6%). É um preprint, com um modelo só, mas vai na mesma direção: quem não carrega o histórico enxerga melhor o que passou ([Song, Cross-Context Review](https://arxiv.org/abs/2603.12123)).
 

@@ -65,7 +65,7 @@ Starting clean has a side most people miss: the new chat knows nothing beyond wh
 
 The request has to state the expected result in a way the AI itself can check. That's why each chat got a goal you could verify: "list the required documents", "list the form fields", "for each field, give the answer and where it came from".
 
-And to explain well what you want, talking usually works better than typing. When we type, we write a short prompt. When we talk, we give context without noticing: the why, what we already tried, what can't go wrong. That's what she did, into the microphone. I use Wispr Flow a lot to dictate for exactly that reason.
+And to explain well what you want, talking usually works better than typing. When we type, we write a short prompt. When we talk, we give context without noticing: the why, what we already tried, what can't go wrong. That's what she did, into the microphone. I use [Wispr Flow](https://wisprflow.ai/) a lot to dictate for exactly that reason.
 
 With a clear goal in each chat, one step is left: checking. And the clean-chat logic shows up again here. In a study with 150 errors planted in documents and code, a second review done in the same conversation caught fewer errors than a review done in a fresh session with no history (F1 of 21.7% versus 28.6%). It's a preprint, with a single model, but it points the same way: whoever doesn't carry the history sees what slipped through more clearly ([Song, Cross-Context Review](https://arxiv.org/abs/2603.12123)).
 
