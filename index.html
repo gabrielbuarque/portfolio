@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0e0e0d">
-  <meta name="description" content="Gabriel Buarque — AI builder, CTO e cofundador da IndiqAI. Tecnologia, produto, inteligência artificial e pesquisa.">
-  <meta property="og:title" content="Gabriel Buarque — AI builder">
-  <meta property="og:description" content="CTO e cofundador da IndiqAI. Construo produtos e sistemas com inteligência artificial.">
+  <meta name="description" content="Gabriel Buarque — Software Architect, AI Builder e CTO da IndiqAI. Software, agentes de IA e automações para resolver problemas reais.">
+  <meta property="og:title" content="Gabriel Buarque — Software Architect · AI Builder · CTO">
+  <meta property="og:description" content="Software, agentes de IA e automações para resolver problemas reais.">
   <meta property="og:url" content="https://nnex.us">
   <link rel="canonical" href="https://nnex.us">
-  <title>Gabriel Buarque — AI builder</title>
+  <link rel="alternate" hreflang="pt-BR" href="https://nnex.us/?lang=pt">
+  <link rel="alternate" hreflang="en" href="https://nnex.us/?lang=en">
+  <title>Gabriel Buarque — Software Architect · AI Builder</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0e0d'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' text-anchor='middle' fill='%23f28b54'%3EGB%3C/text%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +28,6 @@
       --faint: #5d5b55;
       --border: #272724;
       --accent: #f28b54;
-      --accent-soft: rgba(242, 139, 84, .12);
       --l0: #1d1d1a; --l1: #4a2d1c; --l2: #8a4c2a; --l3: #c76c3a; --l4: #f28b54;
       --max: 1120px;
       --sans: "Geist", system-ui, sans-serif;
@@ -38,72 +39,105 @@
     body {
       margin: 0; background: var(--bg); color: var(--text);
       font-family: var(--sans); -webkit-font-smoothing: antialiased; line-height: 1.5;
+      overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
     a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
     ::selection { background: var(--accent); color: var(--bg); }
     h1, h2, h3, p { margin: 0; }
     .wrap { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
-    .mono { font-family: var(--mono); }
     .skip { position: absolute; left: 16px; top: -100px; padding: 10px 16px; background: var(--accent); color: var(--bg); z-index: 100; }
     .skip:focus { top: 16px; }
 
     /* header */
-    header { position: sticky; top: 0; z-index: 50; background: rgba(14,14,13,.8); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
-    .nav { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    header { position: sticky; top: 0; z-index: 50; background: rgba(14,14,13,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .logo { font-family: var(--mono); font-weight: 500; font-size: 15px; letter-spacing: -.02em; }
     .logo i { color: var(--accent); font-style: normal; }
-    nav { display: flex; gap: 28px; align-items: center; }
+    nav { display: flex; gap: 26px; align-items: center; }
     nav a { font-size: 13px; color: var(--muted); transition: color .2s; }
     nav a:hover { color: var(--text); }
-    .status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: #5fd08a; box-shadow: 0 0 0 0 rgba(95,208,138,.5); animation: pulse 2.4s infinite; }
+    .lang {
+      font-family: var(--mono); font-size: 12px; color: var(--text); background: transparent;
+      border: 1px solid var(--border); border-radius: 999px; padding: 6px 4px; cursor: pointer;
+      display: inline-flex; gap: 2px; transition: border-color .2s;
+    }
+    .lang:hover { border-color: var(--muted); }
+    .lang span { padding: 2px 8px; border-radius: 999px; color: var(--faint); transition: all .2s; }
+    .lang span.on { background: var(--text); color: var(--bg); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #5fd08a; box-shadow: 0 0 0 0 rgba(95,208,138,.5); animation: pulse 2.4s infinite; flex: none; }
     @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(95,208,138,0); } 100% { box-shadow: 0 0 0 0 rgba(95,208,138,0); } }
 
     /* hero */
-    .hero { padding: 120px 0 90px; position: relative; }
+    .hero { position: relative; min-height: calc(100svh - 64px); display: flex; flex-direction: column; overflow: hidden; isolation: isolate; }
     .hero::before {
-      content: ""; position: absolute; inset: -80px 0 auto 40%; height: 520px; pointer-events: none;
-      background: radial-gradient(closest-side, rgba(242,139,84,.13), transparent);
+      content: ""; position: absolute; z-index: -2; inset: 0 -10% 0 35%;
+      background: radial-gradient(closest-side, rgba(242,139,84,.16), transparent 70%);
     }
-    .tag { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
-    .tag::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
-    h1 {
-      margin: 28px 0 32px; font-weight: 400; font-size: clamp(56px, 10vw, 128px);
-      line-height: .95; letter-spacing: -.045em;
-    }
+    #scene { position: absolute; z-index: -1; top: 0; right: 0; width: 64%; height: 100%; display: block; }
+    .hero-grid { flex: 1; display: flex; align-items: center; padding: 72px 0 48px; }
+    .hero-copy { max-width: 620px; }
+    .tag { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .tag::before { content: ""; width: 24px; height: 1px; background: var(--accent); flex: none; }
+    h1 { margin: 26px 0 28px; font-weight: 400; font-size: clamp(60px, 9vw, 120px); line-height: .92; letter-spacing: -.045em; }
     h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent); letter-spacing: -.02em; }
-    .lede { max-width: 620px; font-size: clamp(18px, 2vw, 21px); color: var(--muted); font-weight: 300; line-height: 1.65; }
-    .lede b { color: var(--text); font-weight: 500; }
-    .cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 500; border: 1px solid var(--border); transition: all .2s; }
+    .lede { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.25; letter-spacing: -.02em; font-weight: 400; max-width: 560px; }
+    .lede em { font-family: var(--serif); font-style: italic; color: var(--accent); }
+    .sub { margin-top: 20px; color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.7; max-width: 520px; }
+    .cta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 500; border: 1px solid var(--border); background: rgba(14,14,13,.5); transition: all .2s; }
     .btn:hover { border-color: var(--muted); }
     .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
     .btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+    .hud { position: absolute; right: 24px; top: 24px; font-family: var(--mono); font-size: 11px; color: var(--faint); text-align: right; line-height: 1.8; pointer-events: none; }
+    .hud b { color: var(--muted); font-weight: 400; }
+    .hero-foot { border-top: 1px solid var(--border); background: rgba(14,14,13,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .metric { padding: 22px 24px 22px 0; }
+    .metric + .metric { padding-left: 24px; border-left: 1px solid var(--border); }
+    .metric .n { font-size: 28px; font-weight: 300; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+    .metric .l { margin-top: 8px; font-family: var(--mono); font-size: 11px; color: var(--muted); line-height: 1.5; }
 
     /* sections */
-    section { padding: 96px 0; border-top: 1px solid var(--border); scroll-margin-top: 64px; }
+    section { padding: 104px 0; border-top: 1px solid var(--border); scroll-margin-top: 64px; }
     .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
     .idx { font-family: var(--mono); font-size: 12px; color: var(--faint); }
-    h2 { font-weight: 400; font-size: clamp(34px, 5vw, 56px); letter-spacing: -.04em; line-height: 1.08; max-width: 760px; }
+    h2 { font-weight: 400; font-size: clamp(34px, 5vw, 56px); letter-spacing: -.04em; line-height: 1.08; max-width: 780px; }
     h2 em { font-family: var(--serif); font-style: italic; color: var(--accent); }
+    .intro { max-width: 720px; color: var(--muted); font-size: 18px; font-weight: 300; line-height: 1.8; margin: -16px 0 48px; }
+    .intro b { color: var(--text); font-weight: 500; }
 
     /* bento projects */
     .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
     .card {
-      grid-column: span 3; padding: 32px; border: 1px solid var(--border); border-radius: 20px;
-      background: var(--surface); display: flex; flex-direction: column; min-height: 280px;
+      grid-column: span 3; padding: 30px; border: 1px solid var(--border); border-radius: 20px;
+      background: var(--surface); display: flex; flex-direction: column; min-height: 300px;
       transition: border-color .25s, transform .25s, background .25s; position: relative; overflow: hidden;
     }
     .card:hover { border-color: #3a3a35; transform: translateY(-3px); background: var(--surface-2); }
-    .card.wide { grid-column: span 4; }
-    .card.narrow { grid-column: span 2; }
-    .chip { font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; align-self: flex-start; }
-    .card h3 { margin: 22px 0 12px; font-size: 26px; font-weight: 500; letter-spacing: -.03em; }
-    .card p { color: var(--muted); font-size: 15px; max-width: 420px; font-weight: 300; line-height: 1.7; }
-    .card .go { margin-top: auto; padding-top: 28px; font-size: 13px; font-weight: 500; color: var(--accent); display: inline-flex; gap: 6px; }
-    .card .go span { transition: transform .2s; }
-    .card:hover .go span { transform: translate(3px, -3px); }
+    .card.s4 { grid-column: span 4; } .card.s2 { grid-column: span 2; }
+    .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .num { font-family: var(--mono); font-size: 11px; color: var(--faint); }
+    .chip { font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
+    .card h3 { margin: 22px 0 6px; font-size: 26px; font-weight: 500; letter-spacing: -.03em; }
+    .card .kicker { font-size: 14px; color: var(--accent); margin-bottom: 14px; }
+    .card p { color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.7; max-width: 520px; }
+    .kpis { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 22px; }
+    .kpis div { font-size: 26px; font-weight: 300; letter-spacing: -.03em; line-height: 1; }
+    .kpis span { display: block; margin-top: 6px; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0; }
+    .card .links { margin-top: auto; padding-top: 26px; display: flex; gap: 18px; flex-wrap: wrap; }
+    .card .links a { font-size: 13px; font-weight: 500; color: var(--accent); display: inline-flex; gap: 6px; }
+    .card .links a span { transition: transform .2s; display: inline-block; }
+    .card .links a:hover span { transform: translate(3px, -3px); }
+    .card .note { margin-top: auto; padding-top: 26px; font-family: var(--mono); font-size: 11px; color: var(--faint); }
+
+    /* experience */
+    .xp { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+    .xp li { display: grid; grid-template-columns: 160px 1fr 1.4fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--border); transition: background .25s; }
+    .xp .when { font-family: var(--mono); font-size: 12px; color: var(--faint); padding-top: 4px; }
+    .xp h3 { font-size: 21px; font-weight: 500; letter-spacing: -.02em; }
+    .xp .role { color: var(--accent); font-size: 14px; margin-top: 4px; }
+    .xp p { color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.7; }
 
     /* github widget */
     .gh { border: 1px solid var(--border); border-radius: 24px; background: var(--surface); overflow: hidden; }
@@ -132,7 +166,7 @@
     .gh-col h3 { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 18px; }
     .feed { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
     .feed li { display: flex; gap: 12px; font-size: 14px; color: var(--muted); align-items: baseline; }
-    .feed li b { color: var(--text); font-weight: 500; }
+    .feed li b { color: var(--text); font-weight: 500; word-break: break-word; }
     .feed time { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--faint); white-space: nowrap; }
     .feed .ic { font-family: var(--mono); color: var(--accent); font-size: 12px; width: 14px; flex: none; }
     .bar { display: flex; height: 8px; border-radius: 99px; overflow: hidden; gap: 2px; margin-bottom: 18px; }
@@ -146,40 +180,85 @@
     .gh-foot { padding: 16px 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--faint); font-family: var(--mono); }
     .gh-foot a { color: var(--accent); }
 
-    /* research / about */
-    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-    .two p { color: var(--muted); font-size: 18px; font-weight: 300; line-height: 1.8; }
-    .two p + p { margin-top: 20px; }
-    .meta { margin-top: 36px; display: grid; gap: 0; border-top: 1px solid var(--border); }
-    .meta div { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
-    .meta dt { color: var(--muted); } .meta dd { margin: 0; font-family: var(--mono); font-size: 13px; }
+    /* recognition */
+    .awards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; border-top: 1px solid var(--border); }
+    .award { display: grid; grid-template-columns: 112px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+    .award .rank { font-family: var(--serif); font-style: italic; font-size: 40px; line-height: 1; color: var(--accent); }
+    .award p { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.6; }
+    .award p b { color: var(--text); font-weight: 500; }
+
+    /* research & education */
+    .two { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; }
+    .lead-p { color: var(--muted); font-size: 18px; font-weight: 300; line-height: 1.8; }
+    .lead-p + .lead-p { margin-top: 18px; }
+    .lead-p b { color: var(--text); font-weight: 500; }
+    .edu { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+    .edu li { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .edu h3 { font-size: 17px; font-weight: 500; letter-spacing: -.01em; }
+    .edu span { display: block; margin-top: 4px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+    /* stack */
+    .stack { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; border-top: 1px solid var(--border); }
+    .stack div { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+    .stack dt { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .stack dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .stack dd span { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); }
+
+    /* principles */
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .pr { padding: 28px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); }
+    .pr .num { display: block; margin-bottom: 36px; }
+    .pr h3 { font-size: 19px; font-weight: 500; letter-spacing: -.02em; margin-bottom: 10px; }
+    .pr p { color: var(--muted); font-size: 14px; font-weight: 300; line-height: 1.7; }
+    .pr.quote { background: transparent; display: flex; align-items: flex-end; }
+    .pr.quote p { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--text); line-height: 1.3; }
 
     /* contact */
-    .contact { padding: 120px 0; text-align: left; }
+    .contact { padding: 120px 0; }
     .contact h2 { font-size: clamp(44px, 8vw, 104px); max-width: none; }
-    .links { margin-top: 44px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .contact .intro { margin: 28px 0 0; }
+    .links-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
 
     footer { border-top: 1px solid var(--border); padding: 28px 0; }
     .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--faint); font-family: var(--mono); }
 
     .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in { opacity: 1; transform: none; }
+    .hero-copy > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-copy > :nth-child(2) { animation-delay: .08s; } .hero-copy > :nth-child(3) { animation-delay: .16s; }
+    .hero-copy > :nth-child(4) { animation-delay: .24s; } .hero-copy > :nth-child(5) { animation-delay: .32s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 
+    @media (max-width: 960px) {
+      #scene { width: 100%; opacity: .55; }
+      .hud { display: none; }
+      .xp li { grid-template-columns: 1fr; gap: 8px; }
+      .awards, .stack { grid-template-columns: 1fr; }
+      .principles { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 860px) {
-      .card, .card.wide, .card.narrow { grid-column: span 6; min-height: 0; }
-      .stats { grid-template-columns: repeat(2, 1fr); }
+      .card, .card.s4, .card.s2 { grid-column: span 6; min-height: 0; }
+      .stats, .metrics { grid-template-columns: repeat(2, 1fr); }
       .stat:nth-child(2) { border-right: 0; }
       .stat:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .metric:nth-child(3) { padding-left: 0; border-left: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
       .gh-cols, .two { grid-template-columns: 1fr; }
       .gh-col + .gh-col { border-left: 0; border-top: 1px solid var(--border); }
-      .two { gap: 32px; }
+      .two { gap: 40px; }
     }
     @media (max-width: 600px) {
-      .wrap { width: min(calc(100% - 36px), var(--max)); }
+      .wrap { width: min(calc(100% - 32px), var(--max)); }
       nav a:not(.keep) { display: none; }
-      .hero { padding: 80px 0 64px; }
+      .hero-grid { padding: 56px 0 40px; }
       section { padding: 72px 0; }
+      .principles { grid-template-columns: 1fr; }
       .gh-top, .stat, .gh-col, .heat-wrap { padding-inline: 20px; }
+      .award { grid-template-columns: 84px 1fr; }
+      .award .rank { font-size: 32px; }
+      .stack div { grid-template-columns: 1fr; gap: 10px; }
+      .metric, .metric + .metric { padding: 18px 12px 18px 0; }
+      .metric:nth-child(even) { padding-left: 16px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -189,63 +268,171 @@
   </style>
 </head>
 <body>
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <a class="skip" href="#conteudo" data-i18n="skip">Pular para o conteúdo</a>
 
   <header>
     <div class="wrap nav">
-      <a href="#" class="logo" aria-label="Gabriel Buarque, início">gb<i>/</i>nnex.us</a>
-      <nav aria-label="Navegação principal">
-        <a href="#trabalho">Trabalho</a>
+      <a href="#" class="logo" aria-label="Gabriel Buarque">gb<i>/</i>nnex.us</a>
+      <nav aria-label="Menu">
+        <a href="#projetos" data-i18n="nav.work">Projetos</a>
+        <a href="#experiencia" data-i18n="nav.xp">Experiência</a>
         <a href="#github">GitHub</a>
-        <a href="#pesquisa">Pesquisa</a>
-        <a href="#contato" class="keep">Contato</a>
+        <a href="#pesquisa" data-i18n="nav.research">Pesquisa</a>
+        <a href="#contato" class="keep" data-i18n="nav.contact">Contato</a>
+        <button class="lang" id="lang" type="button" aria-label="Mudar idioma / Change language"><span data-l="pt">PT</span><span data-l="en">EN</span></button>
       </nav>
     </div>
   </header>
 
   <main id="conteudo">
-    <div class="wrap hero">
-      <div class="tag">AI builder · produto · tecnologia</div>
-      <h1>Gabriel<br><em>Buarque</em></h1>
-      <p class="lede">
-        <b>CTO e cofundador da IndiqAI.</b> Construo produtos e sistemas com
-        inteligência artificial, conectando tecnologia, produto e operação
-        para resolver problemas do mundo real.
-      </p>
-      <div class="cta">
-        <a class="btn primary" href="#trabalho">Ver trabalho ↓</a>
-        <a class="btn" href="https://github.com/gabrielbuarque" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    <div class="hero">
+      <canvas id="scene" aria-hidden="true"></canvas>
+      <div class="hud" aria-hidden="true">
+        <div>nnexus://memory-graph</div>
+        <div><b id="hud-nodes">0</b> nodes · <b id="hud-edges">0</b> edges</div>
+        <div><b id="hud-sig">0</b> <span data-i18n="hud.sig">sinais em trânsito</span></div>
+      </div>
+
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="tag">Software Architect · AI Builder · CTO</div>
+          <h1>Gabriel<br><em>Buarque</em></h1>
+          <p class="lede" data-i18n="hero.lede">Construo software, <em>agentes de IA</em> e automações para resolver problemas reais.</p>
+          <p class="sub" data-i18n="hero.sub">Cofundador e CTO da IndiqAI · Technical Operations na Volanos · Mestrando em Ciência, Tecnologia e Inovação na UFRN.</p>
+          <div class="cta">
+            <a class="btn primary" href="#projetos" data-i18n="hero.cta">Ver projetos ↓</a>
+            <a class="btn" href="#contato" data-i18n="hero.cta2">Vamos conversar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-foot">
+        <div class="wrap metrics">
+          <div class="metric"><div class="n">730+</div><div class="l" data-i18n="m1">usuários na validação da IndiqAI</div></div>
+          <div class="metric"><div class="n">1M+</div><div class="l" data-i18n="m2">interações reportadas</div></div>
+          <div class="metric"><div class="n" data-i18n="m3n">4º</div><div class="l" data-i18n="m3">IEEE/I3E Entrepreneurship Challenge LATAM</div></div>
+          <div class="metric"><div class="n" data-i18n="m4n">3.586</div><div class="l" data-i18n="m4">testes aprovados no Shared Brain</div></div>
+        </div>
       </div>
     </div>
 
-    <section id="trabalho">
+    <!-- PROJECTS -->
+    <section id="projetos">
       <div class="wrap">
         <div class="sec-head">
-          <h2 class="reveal">O que estou <em>construindo</em></h2>
-          <span class="idx">01 / trabalho</span>
+          <h2 class="reveal" data-i18n="p.h">Projetos <em>selecionados</em></h2>
+          <span class="idx" data-i18n="p.idx">01 / projetos</span>
         </div>
         <div class="bento">
-          <a class="card wide reveal" href="https://indiqai.com/" target="_blank" rel="noopener noreferrer">
-            <span class="chip">Cofundador · CTO</span>
+          <article class="card s4 reveal">
+            <div class="card-top"><span class="chip">SaaS · Product · Engineering</span><span class="num">01</span></div>
             <h3>IndiqAI</h3>
-            <p>Produto e tecnologia para transformar inteligência artificial em ferramentas úteis para negócios.</p>
-            <span class="go">Visitar <span>↗</span></span>
-          </a>
-          <a class="card narrow reveal" href="https://www.npmjs.com/package/n8n-nodes-difyai" target="_blank" rel="noopener noreferrer">
-            <span class="chip">open source · npm</span>
+            <div class="kicker" data-i18n="p1.k">Fidelização e indicação digital</div>
+            <p data-i18n="p1.d">Plataforma SaaS para pequenos e médios negócios: cartões de fidelidade digitais, selos, recompensas, QR Codes e programas de indicação. Como CTO, cuido da arquitetura multitenant, Row Level Security, processamento assíncrono, observabilidade e do desenvolvimento assistido por agentes de IA.</p>
+            <div class="kpis">
+              <div>730+<span data-i18n="p1.k1">usuários</span></div>
+              <div>1M+<span data-i18n="p1.k2">interações</span></div>
+              <div>400+<span data-i18n="p1.k3">prêmios resgatados</span></div>
+            </div>
+            <div class="links"><a href="https://indiqai.com/" target="_blank" rel="noopener noreferrer"><b data-i18n="p1.l">Conhecer a IndiqAI</b> <span>↗</span></a></div>
+          </article>
+
+          <article class="card s2 reveal">
+            <div class="card-top"><span class="chip">AI Eng · MCP</span><span class="num">02</span></div>
+            <h3>Nnexus</h3>
+            <div class="kicker" data-i18n="p2.k">Memória persistente para agentes</div>
+            <p data-i18n="p2.d">Um second brain para agentes de IA: guarda decisões, preferências e contexto e os entrega a qualquer assistente via MCP, com busca semântica, proveniência e ciclo de vida das memórias.</p>
+            <div class="links"><a href="https://brain.nnex.us/" target="_blank" rel="noopener noreferrer"><b data-i18n="p2.l">Conhecer o Nnexus</b> <span>↗</span></a></div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-top"><span class="chip">Architecture · Security · RAG</span><span class="num">03</span></div>
+            <h3>Volanos Shared Brain</h3>
+            <div class="kicker" data-i18n="p3.k">Inteligência compartilhada com controle de acesso</div>
+            <p data-i18n="p3.d">Pessoas e agentes compartilham conhecimento autorizado, separando memórias pessoais, conteúdo corporativo e dados restritos. A decisão central: permissões aplicadas pela arquitetura antes da recuperação vetorial, nunca pelo modelo.</p>
+            <div class="kpis"><div data-i18n="p3.n">3.586<span>testes aprovados · set/2026</span></div></div>
+            <div class="links"><a href="https://github.com/gabrielbuarque/volanos-shared-brain" target="_blank" rel="noopener noreferrer"><b data-i18n="p3.l">Repositório</b> <span>↗</span></a></div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-top"><span class="chip">Geospatial · CRM · AI</span><span class="num">04</span></div>
+            <h3 data-i18n="p4.t">Mapa Comercial IndiqAI</h3>
+            <div class="kicker" data-i18n="p4.k">Inteligência geográfica para prospecção</div>
+            <p data-i18n="p4.d">Transforma a base do CRM em um mapa dos bairros de Natal para decidir quem abordar, quais regiões priorizar e como planejar rotas, com um copiloto de IA que executa ações comerciais autorizadas. Pensado para uso no celular.</p>
+            <div class="note" data-i18n="p4.n">ferramenta interna · em uso pela equipe comercial</div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-top"><span class="chip">Open Source · TypeScript</span><span class="num">05</span></div>
             <h3>n8n-nodes-difyai</h3>
-            <p>Nós para integrar o Dify ao n8n.</p>
-            <span class="go">Ver no npm <span>↗</span></span>
-          </a>
+            <div class="kicker" data-i18n="p5.k">Integração open source</div>
+            <p data-i18n="p5.d">Pacote comunitário que leva o Dify para dentro dos workflows do n8n: chat, arquivos, áudio e respostas em streaming, sem configurar chamadas HTTP na mão.</p>
+            <div class="links">
+              <a href="https://github.com/gabrielbuarque/n8n-nodes-difyai" target="_blank" rel="noopener noreferrer"><b>GitHub</b> <span>↗</span></a>
+              <a href="https://www.npmjs.com/package/n8n-nodes-difyai" target="_blank" rel="noopener noreferrer"><b>npm</b> <span>↗</span></a>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-top"><span class="chip">Startup · AI · SaaS</span><span class="num">06</span></div>
+            <h3>ChatCont</h3>
+            <div class="kicker" data-i18n="p6.k">Automação de atendimento contábil</div>
+            <p data-i18n="p6.d">Plataforma de atendimento e automação com IA para escritórios contábeis. Fiz a concepção do produto, a definição das funcionalidades e o desenvolvimento.</p>
+            <div class="kpis"><div data-i18n="p6.n">16º<span>de 60 no Startup Nordeste 3</span></div></div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- EXPERIENCE -->
+    <section id="experiencia">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal" data-i18n="x.h">Do código ao <em>negócio</em></h2>
+          <span class="idx" data-i18n="x.idx">02 / experiência</span>
+        </div>
+        <p class="intro reveal" data-i18n="x.intro">Passei por análise de dados, desenvolvimento full stack, DevOps, gestão de projetos e empreendedorismo. Hoje tomo decisões técnicas que consideram <b>o código, o produto, a operação e o negócio</b>.</p>
+        <ol class="xp">
+          <li class="reveal">
+            <div class="when" data-i18n="x1.w">2024 — atual</div>
+            <div><h3>IndiqAI</h3><div class="role" data-i18n="x1.r">Cofundador & CTO</div></div>
+            <p data-i18n="x1.d">Arquitetura e direção tecnológica: backend, frontend, banco de dados, segurança, infraestrutura e integrações. Coordeno o desenvolvimento assistido por agentes de IA, definindo requisitos, revisando mudanças e garantindo que tudo funcione de ponta a ponta.</p>
+          </li>
+          <li class="reveal">
+            <div class="when" data-i18n="x2.w">2026 — atual</div>
+            <div><h3>Volanos</h3><div class="role">Technical Operations Specialist</div></div>
+            <p data-i18n="x2.d">Operações técnicas, automações, integrações e infraestrutura para projetos no Canadá e nos EUA. Lidero a arquitetura do Volanos Shared Brain: memória corporativa, controle de acesso e governança de dados.</p>
+          </li>
+          <li class="reveal">
+            <div class="when" data-i18n="x3.w">antes</div>
+            <div><h3>Axyon Software</h3><div class="role" data-i18n="x3.r">Cofundador · Liderança técnica e operações</div></div>
+            <p data-i18n="x3.d">Dados, full stack, DevOps, gestão de projetos e liderança técnica. Aprendi a conectar engenharia com prioridades comerciais, orçamento e equipes, incluindo projetos no ecossistema de inovação do RN, como o Conexão Hub.</p>
+          </li>
+          <li class="reveal">
+            <div class="when">2025 — 2026</div>
+            <div><h3>ChatCont</h3><div class="role" data-i18n="x4.r">Fundador</div></div>
+            <p data-i18n="x4.d">Plataforma de atendimento e automação com IA para o setor contábil. Selecionada no Startup Nordeste 3 (16º de 60).</p>
+          </li>
+          <li class="reveal">
+            <div class="when" data-i18n="x5.w">antes</div>
+            <div><h3>CompineStudio</h3><div class="role" data-i18n="x5.r">Fundador & CEO</div></div>
+            <p data-i18n="x5.d">Empresa de marketing e automação. Minha primeira experiência de gestão: clientes, equipe, processos e entregas comerciais.</p>
+          </li>
+          <li class="reveal">
+            <div class="when" data-i18n="x6.w">antes</div>
+            <div><h3>Mundo SENAI</h3><div class="role" data-i18n="x6.r">Instrutor de Robótica Educacional</div></div>
+            <p data-i18n="x6.d">Ensinei robótica, programação, eletrônica e lógica, e aprendi a explicar assuntos técnicos para diferentes níveis de conhecimento.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- GITHUB -->
     <section id="github">
       <div class="wrap">
         <div class="sec-head">
-          <h2 class="reveal">Em público, <em>ao vivo</em></h2>
-          <span class="idx">02 / github</span>
+          <h2 class="reveal" data-i18n="g.h">Em público, <em>ao vivo</em></h2>
+          <span class="idx">03 / github</span>
         </div>
 
         <div class="gh reveal" id="gh" aria-live="polite">
@@ -254,88 +441,254 @@
               <img id="gh-avatar" alt="" width="44" height="44" src="https://github.com/gabrielbuarque.png?size=88">
               <div><strong id="gh-name">Gabriel Buarque</strong><span>@gabrielbuarque</span></div>
             </div>
-            <div class="gh-sync"><span class="dot"></span><span id="gh-sync">sincronizando…</span></div>
+            <div class="gh-sync"><span class="dot"></span><span id="gh-sync">…</span></div>
           </div>
           <div class="stats">
-            <div class="stat"><div class="n" id="s-contrib">—</div><div class="l">contribuições / ano</div></div>
-            <div class="stat"><div class="n" id="s-repos">—</div><div class="l">repositórios</div></div>
-            <div class="stat"><div class="n" id="s-streak">—</div><div class="l">dias de sequência</div></div>
-            <div class="stat"><div class="n" id="s-follow">—</div><div class="l">seguidores</div></div>
+            <div class="stat"><div class="n" id="s-contrib">—</div><div class="l" data-i18n="g.s1">contribuições / ano</div></div>
+            <div class="stat"><div class="n" id="s-repos">—</div><div class="l" data-i18n="g.s2">repositórios</div></div>
+            <div class="stat"><div class="n" id="s-streak">—</div><div class="l" data-i18n="g.s3">dias de sequência</div></div>
+            <div class="stat"><div class="n" id="s-follow">—</div><div class="l" data-i18n="g.s4">seguidores</div></div>
           </div>
           <div class="heat-wrap">
-            <div class="heat-meta"><span id="heat-range">últimos 12 meses</span><span id="heat-best"></span></div>
-            <div class="heat" id="heat" role="img" aria-label="Gráfico de contribuições do último ano"></div>
-            <div class="legend">menos <i style="background:var(--l0)"></i><i style="background:var(--l1)"></i><i style="background:var(--l2)"></i><i style="background:var(--l3)"></i><i style="background:var(--l4)"></i> mais</div>
+            <div class="heat-meta"><span id="heat-range" data-i18n="g.range">últimos 12 meses</span><span id="heat-best"></span></div>
+            <div class="heat" id="heat" role="img" aria-label="GitHub contributions"></div>
+            <div class="legend"><span data-i18n="g.less">menos</span> <i style="background:var(--l0)"></i><i style="background:var(--l1)"></i><i style="background:var(--l2)"></i><i style="background:var(--l3)"></i><i style="background:var(--l4)"></i> <span data-i18n="g.more">mais</span></div>
           </div>
           <div class="gh-cols">
             <div class="gh-col">
-              <h3>Atividade recente</h3>
-              <ul class="feed" id="feed"><li class="skeleton">carregando…</li></ul>
+              <h3 data-i18n="g.act">Atividade recente</h3>
+              <ul class="feed" id="feed"><li class="skeleton">…</li></ul>
             </div>
             <div class="gh-col">
-              <h3>Linguagens</h3>
+              <h3 data-i18n="g.langs">Linguagens</h3>
               <div class="bar" id="lang-bar"></div>
-              <ul class="langs" id="langs"><li class="skeleton">carregando…</li></ul>
+              <ul class="langs" id="langs"><li class="skeleton">…</li></ul>
             </div>
           </div>
           <div class="gh-foot">
-            <span>dados públicos · API do GitHub</span>
+            <span data-i18n="g.foot">dados públicos · API do GitHub</span>
             <a href="https://github.com/gabrielbuarque" target="_blank" rel="noopener noreferrer">github.com/gabrielbuarque ↗</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="pesquisa">
+    <!-- RECOGNITION -->
+    <section id="reconhecimentos">
       <div class="wrap">
         <div class="sec-head">
-          <h2 class="reveal">Construção e investigação <em>caminham juntas.</em></h2>
-          <span class="idx">03 / pesquisa &amp; sobre</span>
+          <h2 class="reveal" data-i18n="a.h">Reconhecimentos e <em>resultados</em></h2>
+          <span class="idx" data-i18n="a.idx">04 / reconhecimentos</span>
         </div>
-        <div class="two">
-          <div class="reveal">
-            <p>Sou mestrando em Ciência, Tecnologia e Inovação pela UFRN. Minha pesquisa parte do encontro entre tecnologia, empreendedorismo e problemas concretos.</p>
-            <dl class="meta">
-              <div><dt>Hoje</dt><dd>CTO · IndiqAI</dd></div>
-              <div><dt>Mestrado</dt><dd>CTI · UFRN</dd></div>
-              <div><dt>Foco</dt><dd>IA aplicada · automação</dd></div>
-            </dl>
-          </div>
-          <div class="reveal">
-            <p>Do problema ao produto. Meu trabalho passa por arquitetura de software, automação e experimentação com IA.</p>
-            <p>Gosto de pegar questões ambíguas, encontrar o que realmente precisa ser resolvido e construir algo que possa ser usado, observado e melhorado.</p>
-          </div>
+        <div class="awards">
+          <div class="award reveal"><span class="rank" data-i18n="a1.r">4º</span><p data-i18n="a1.d"><b>Internacional no IEEE/I3E Entrepreneurship Challenge LATAM</b>, com a IndiqAI.</p></div>
+          <div class="award reveal"><span class="rank" data-i18n="a2.r">2º</span><p data-i18n="a2.d"><b>Regional no IEEE/I3E</b>, com a IndiqAI.</p></div>
+          <div class="award reveal"><span class="rank">730+</span><p data-i18n="a3.d"><b>Validação da IndiqAI no GO!RN</b>, com mais de 1 milhão de interações reportadas.</p></div>
+          <div class="award reveal"><span class="rank" data-i18n="a4.r">16º</span><p data-i18n="a4.d"><b>Entre 60 selecionados no Startup Nordeste 3</b>, com o ChatCont.</p></div>
+          <div class="award reveal"><span class="rank" data-i18n="a5.r">4º</span><p data-i18n="a5.d"><b>No processo seletivo do mestrado da UFRN</b>, o participante mais jovem da turma.</p></div>
+          <div class="award reveal"><span class="rank">26–27</span><p data-i18n="a6.d"><b>Representação discente suplente</b> no colegiado do PPgCTI/UFRN.</p></div>
+          <div class="award reveal"><span class="rank">→</span><p data-i18n="a7.d"><b>Seleção e avanço</b> no Startup Nordeste e no Catalisa ICT com projetos empreendedores.</p></div>
+          <div class="award reveal"><span class="rank">npm</span><p data-i18n="a8.d"><b>Pacote open source</b> n8n-nodes-difyai publicado para a comunidade.</p></div>
         </div>
       </div>
     </section>
 
+    <!-- RESEARCH -->
+    <section id="pesquisa">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal" data-i18n="r.h">Construção e investigação <em>caminham juntas.</em></h2>
+          <span class="idx" data-i18n="r.idx">05 / pesquisa & formação</span>
+        </div>
+        <div class="two">
+          <div class="reveal">
+            <p class="lead-p" data-i18n="r.p1">No <b>Mestrado Profissional em Ciência, Tecnologia e Inovação da UFRN</b>, desenvolvo e valido um módulo de inteligência analítica com preservação de privacidade para ecossistemas de fidelização e indicação.</p>
+            <p class="lead-p" data-i18n="r.p2">A pesquisa combina análise estatística, tecnologias de aprimoramento de privacidade (PETs), LGPD e Design Science Research, usando a IndiqAI como contexto real de aplicação. Orientador: Prof. Dr. Orivaldo Vieira de Santana Junior.</p>
+          </div>
+          <ul class="edu reveal">
+            <li><h3 data-i18n="e1.t">Mestrado Profissional em Ciência, Tecnologia e Inovação</h3><span data-i18n="e1.s">UFRN · 2026 — atual</span></li>
+            <li><h3 data-i18n="e2.t">Graduação em Análise e Desenvolvimento de Sistemas</h3><span>Descomplica Faculdade Digital</span></li>
+            <li><h3 data-i18n="e3.t">Técnico em Programação de Jogos Digitais</h3><span>SESI / SENAI</span></li>
+            <li><h3 data-i18n="e4.t">Maker: eletrônica, robótica, impressão 3D e ESP32</h3><span data-i18n="e4.s">onde software encontra hardware</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal" data-i18n="s.h">Ferramentas que uso <em>em produção</em></h2>
+          <span class="idx">06 / stack</span>
+        </div>
+        <dl class="stack">
+          <div class="reveal"><dt data-i18n="s1">Linguagens</dt><dd><span>Python</span><span>TypeScript</span><span>JavaScript</span><span>SQL</span><span>Dart</span></dd></div>
+          <div class="reveal"><dt data-i18n="s2">IA</dt><dd><span>LLMs</span><span data-i18n="s2a">Agentes</span><span>MCP</span><span>RAG</span><span data-i18n="s2b">Engenharia de contexto</span><span data-i18n="s2c">Memória persistente</span></dd></div>
+          <div class="reveal"><dt>Backend</dt><dd><span>FastAPI</span><span>Node.js</span><span>REST</span><span>Webhooks</span><span data-i18n="s3a">Filas & async</span></dd></div>
+          <div class="reveal"><dt>Frontend</dt><dd><span>React</span><span>Vite</span><span>Flutter</span><span>FlutterFlow</span></dd></div>
+          <div class="reveal"><dt data-i18n="s5">Dados</dt><dd><span>PostgreSQL</span><span>Supabase</span><span>Redis</span><span>RLS</span></dd></div>
+          <div class="reveal"><dt data-i18n="s6">Automação</dt><dd><span>n8n</span><span>Dify</span><span>Workflows</span></dd></div>
+          <div class="reveal"><dt data-i18n="s7">Infraestrutura</dt><dd><span>Docker</span><span>Linux</span><span>Coolify</span><span>Easypanel</span><span>Cloudflare</span><span>Netlify</span><span>GitHub Actions</span></dd></div>
+          <div class="reveal"><dt data-i18n="s8">Qualidade & segurança</dt><dd><span>Playwright</span><span>CI/CD</span><span data-i18n="s8a">Controle de acesso</span><span data-i18n="s8b">Observabilidade</span><span>DevSecOps</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section id="como">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal" data-i18n="w.h">Entender o problema <em>antes</em> de escolher a tecnologia.</h2>
+          <span class="idx" data-i18n="w.idx">07 / como trabalho</span>
+        </div>
+        <div class="principles">
+          <div class="pr reveal"><span class="num">01</span><h3 data-i18n="w1.t">Arquitetura antes da implementação</h3><p data-i18n="w1.d">Entender limites, dependências e riscos evita decisões que ficam caras depois.</p></div>
+          <div class="pr reveal"><span class="num">02</span><h3 data-i18n="w2.t">IA como parte da engenharia</h3><p data-i18n="w2.d">Uso agentes para ampliar minha capacidade de execução, mas código gerado não é código validado.</p></div>
+          <div class="pr reveal"><span class="num">03</span><h3 data-i18n="w3.t">Segurança desde o início</h3><p data-i18n="w3.d">Permissões, integridade de dados, recuperação de falhas e observabilidade fazem parte da solução.</p></div>
+          <div class="pr reveal"><span class="num">04</span><h3 data-i18n="w4.t">Funcionando de ponta a ponta</h3><p data-i18n="w4.d">Pronto é quando cumpre o objetivo real nas condições esperadas, não quando a interface abre.</p></div>
+          <div class="pr reveal"><span class="num">05</span><h3 data-i18n="w5.t">Aprender construindo</h3><p data-i18n="w5.d">Construir, testar, encontrar problemas, corrigir e observar sistemas em uso.</p></div>
+          <div class="pr quote reveal"><p data-i18n="w6">“Gosto de entender como as coisas funcionam e encontrar maneiras de fazê-las funcionar melhor.”</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
     <section id="contato" class="contact">
       <div class="wrap">
-        <div class="sec-head"><span class="idx">04 / contato</span></div>
-        <h2 class="reveal">Vamos construir <em>algo?</em></h2>
-        <div class="links">
-          <a class="btn primary" href="https://github.com/gabrielbuarque" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <div class="sec-head"><span class="idx" data-i18n="c.idx">08 / contato</span></div>
+        <h2 class="reveal" data-i18n="c.h">Vamos <em>conversar?</em></h2>
+        <p class="intro reveal" data-i18n="c.d">Arquitetura de software, produtos SaaS, IA aplicada, agentes autônomos, automações e desafios técnicos que exigem mais do que implementar funcionalidades.</p>
+        <div class="links-row reveal">
+          <a class="btn primary" href="mailto:buarquegabriel01@gmail.com">buarquegabriel01@gmail.com</a>
+          <a class="btn" href="https://br.linkedin.com/in/gabrielbuarque-cto" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a class="btn" href="https://github.com/gabrielbuarque" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           <a class="btn" href="https://indiqai.com/" target="_blank" rel="noopener noreferrer">IndiqAI ↗</a>
-          <a class="btn" href="https://www.npmjs.com/package/n8n-nodes-difyai" target="_blank" rel="noopener noreferrer">npm ↗</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap foot"><span>Gabriel Buarque</span><span>nnex.us · © 2026</span></div>
+    <div class="wrap foot"><span>Gabriel Buarque · Natal, RN</span><span>nnex.us · © 2026</span></div>
   </footer>
 
+  <!-- i18n + GitHub widget -->
   <script>
   (() => {
-    const USER = 'gabrielbuarque';
-    const $ = id => document.getElementById(id);
-    const LANG_COLORS = { TypeScript:'#3178c6', JavaScript:'#f1e05a', HTML:'#e34c26', CSS:'#a78bfa', Shell:'#89e051', Python:'#3572a5', Go:'#00add8', Rust:'#dea584' };
-    const TTL = 30 * 60 * 1000;
+    const EN = {
+      'skip': 'Skip to content',
+      'nav.work': 'Projects', 'nav.xp': 'Experience', 'nav.research': 'Research', 'nav.contact': 'Contact',
+      'hud.sig': 'signals in transit',
+      'hero.lede': 'I build software, <em>AI agents</em> and automations that solve real problems.',
+      'hero.sub': 'Co-founder &amp; CTO at IndiqAI · Technical Operations at Volanos · Master’s student in Science, Technology &amp; Innovation at UFRN.',
+      'hero.cta': 'See projects ↓', 'hero.cta2': 'Let’s talk',
+      'm1': 'users during IndiqAI validation', 'm2': 'reported interactions', 'm3n': '4th', 'm3': 'IEEE/I3E Entrepreneurship Challenge LATAM',
+      'm4n': '3,586', 'm4': 'passing tests on Shared Brain',
+      'p.h': 'Selected <em>projects</em>', 'p.idx': '01 / projects',
+      'p1.k': 'Digital loyalty &amp; referrals',
+      'p1.d': 'SaaS platform for small and mid-sized businesses: digital loyalty cards, stamps, rewards, QR codes and referral programs. As CTO I own the multitenant architecture, Row Level Security, async processing, observability and AI-agent-assisted development.',
+      'p1.k1': 'users', 'p1.k2': 'interactions', 'p1.k3': 'rewards redeemed', 'p1.l': 'Visit IndiqAI',
+      'p2.k': 'Persistent memory for AI agents',
+      'p2.d': 'A second brain for AI agents: it stores decisions, preferences and context and serves them to any assistant over MCP, with semantic search, provenance and memory lifecycle.',
+      'p2.l': 'Explore Nnexus',
+      'p3.k': 'Shared intelligence with access control',
+      'p3.d': 'People and agents share authorized knowledge while personal memory, company content and restricted data stay apart. The core decision: permissions are enforced by the architecture before vector retrieval — never by the model.',
+      'p3.n': '3,586<span>passing tests · Sep 2026</span>', 'p3.l': 'Repository',
+      'p4.t': 'IndiqAI Sales Map', 'p4.k': 'Geospatial intelligence for prospecting',
+      'p4.d': 'Turns CRM data into a neighborhood map of Natal to decide who to approach, which areas to prioritize and how to plan routes — with an AI copilot that runs authorized sales actions. Built mobile-first.',
+      'p4.n': 'internal tool · used by the sales team',
+      'p5.k': 'Open-source integration',
+      'p5.d': 'Community package that brings Dify into n8n workflows: chat, files, audio and streaming responses, no hand-built HTTP calls.',
+      'p6.k': 'AI customer service for accounting firms',
+      'p6.d': 'An AI support and automation platform for accounting firms. I led product concept, feature definition and development.',
+      'p6.n': '16th<span>of 60 at Startup Nordeste 3</span>',
+      'x.h': 'From code to <em>business</em>', 'x.idx': '02 / experience',
+      'x.intro': 'I’ve worked across data analysis, full-stack development, DevOps, project management and entrepreneurship. Today my technical decisions weigh <b>the code, the product, the operation and the business</b>.',
+      'x1.w': '2024 — now', 'x1.r': 'Co-founder &amp; CTO',
+      'x1.d': 'Architecture and technical direction: backend, frontend, database, security, infrastructure and integrations. I coordinate AI-agent-assisted development — defining requirements, reviewing changes and making sure everything works end to end.',
+      'x2.w': '2026 — now',
+      'x2.d': 'Technical operations, automations, integrations and infrastructure for projects in Canada and the US. I lead the architecture of the Volanos Shared Brain: corporate memory, access control and data governance.',
+      'x3.w': 'earlier', 'x3.r': 'Co-founder · Tech lead &amp; operations',
+      'x3.d': 'Data, full stack, DevOps, project management and technical leadership. I learned to tie engineering to commercial priorities, budgets and teams, including projects in Rio Grande do Norte’s innovation ecosystem such as Conexão Hub.',
+      'x4.r': 'Founder', 'x4.d': 'AI customer-service and automation platform for the accounting sector. Selected for Startup Nordeste 3 (16th of 60).',
+      'x5.w': 'earlier', 'x5.r': 'Founder &amp; CEO', 'x5.d': 'A marketing and automation company. My first management experience: clients, team, processes and commercial delivery.',
+      'x6.w': 'earlier', 'x6.r': 'Educational Robotics Instructor', 'x6.d': 'Taught robotics, programming, electronics and logic — and learned to explain technical topics to every level.',
+      'g.h': 'In public, <em>live</em>', 'g.s1': 'contributions / year', 'g.s2': 'repositories', 'g.s3': 'day streak', 'g.s4': 'followers',
+      'g.range': 'last 12 months', 'g.less': 'less', 'g.more': 'more', 'g.act': 'Recent activity', 'g.langs': 'Languages', 'g.foot': 'public data · GitHub API',
+      'a.h': 'Recognition &amp; <em>results</em>', 'a.idx': '04 / recognition',
+      'a1.r': '4th', 'a1.d': '<b>International at the IEEE/I3E Entrepreneurship Challenge LATAM</b>, with IndiqAI.',
+      'a2.r': '2nd', 'a2.d': '<b>Regional at IEEE/I3E</b>, with IndiqAI.',
+      'a3.d': '<b>IndiqAI validation at GO!RN</b>, with over 1 million reported interactions.',
+      'a4.r': '16th', 'a4.d': '<b>Among 60 selected at Startup Nordeste 3</b>, with ChatCont.',
+      'a5.r': '4th', 'a5.d': '<b>In UFRN’s master’s admission</b>, the youngest in the cohort.',
+      'a6.d': '<b>Alternate student representative</b> on the PPgCTI/UFRN board.',
+      'a7.d': '<b>Selected and advanced</b> in Startup Nordeste and Catalisa ICT with startup projects.',
+      'a8.d': '<b>Open-source package</b> n8n-nodes-difyai published for the community.',
+      'r.h': 'Building and research <em>go together.</em>', 'r.idx': '05 / research &amp; education',
+      'r.p1': 'In the <b>Professional Master’s in Science, Technology &amp; Innovation at UFRN</b>, I’m building and validating a privacy-preserving analytics module for loyalty and referral ecosystems.',
+      'r.p2': 'The research combines statistical analysis, privacy-enhancing technologies (PETs), Brazil’s LGPD and Design Science Research, using IndiqAI as a real-world application context. Advisor: Prof. Dr. Orivaldo Vieira de Santana Junior.',
+      'e1.t': 'Professional Master’s in Science, Technology &amp; Innovation', 'e1.s': 'UFRN · 2026 — now',
+      'e2.t': 'Associate degree in Systems Analysis &amp; Development', 'e3.t': 'Technical degree in Digital Game Programming',
+      'e4.t': 'Maker: electronics, robotics, 3D printing and ESP32', 'e4.s': 'where software meets hardware',
+      's.h': 'Tools I use <em>in production</em>', 's1': 'Languages', 's2': 'AI', 's2a': 'Agents', 's2b': 'Context engineering', 's2c': 'Persistent memory',
+      's3a': 'Queues &amp; async', 's5': 'Data', 's6': 'Automation', 's7': 'Infrastructure', 's8': 'Quality &amp; security', 's8a': 'Access control', 's8b': 'Observability',
+      'w.h': 'Understand the problem <em>before</em> picking the technology.', 'w.idx': '07 / how I work',
+      'w1.t': 'Architecture before implementation', 'w1.d': 'Understanding limits, dependencies and risks avoids decisions that get expensive later.',
+      'w2.t': 'AI as part of engineering', 'w2.d': 'I use agents to extend what I can execute — but generated code is not validated code.',
+      'w3.t': 'Security from day one', 'w3.d': 'Permissions, data integrity, failure recovery and observability are part of the solution.',
+      'w4.t': 'Working end to end', 'w4.d': 'Done means it meets the real goal under real conditions, not that the screen loads.',
+      'w5.t': 'Learning by building', 'w5.d': 'Build, test, find problems, fix them and watch systems in use.',
+      'w6': '“I like understanding how things work and finding ways to make them work better.”',
+      'c.idx': '08 / contact', 'c.h': 'Let’s <em>talk?</em>',
+      'c.d': 'Software architecture, SaaS products, applied AI, autonomous agents, automation and technical challenges that take more than shipping features.'
+    };
+    const PT = {};
+    const nodes = document.querySelectorAll('[data-i18n]');
+    nodes.forEach(el => { PT[el.dataset.i18n] = el.innerHTML; });
+    const META = {
+      pt: { title: 'Gabriel Buarque — Software Architect · AI Builder', html: 'pt-BR' },
+      en: { title: 'Gabriel Buarque — Software Architect · AI Builder', html: 'en' }
+    };
+
+    let lang = 'pt';
+    try {
+      const q = new URLSearchParams(location.search).get('lang');
+      const stored = localStorage.getItem('lang');
+      lang = q === 'en' || q === 'pt' ? q : stored || ((navigator.language || '').toLowerCase().startsWith('pt') ? 'pt' : 'en');
+    } catch (_) {}
+
+    function apply(l) {
+      lang = l;
+      const dict = l === 'en' ? EN : PT;
+      nodes.forEach(el => { const v = dict[el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+      document.documentElement.lang = META[l].html;
+      document.querySelectorAll('#lang span').forEach(s => s.classList.toggle('on', s.dataset.l === l));
+      try { localStorage.setItem('lang', l); } catch (_) {}
+      window.dispatchEvent(new CustomEvent('langchange', { detail: l }));
+    }
+    document.getElementById('lang').addEventListener('click', () => apply(lang === 'pt' ? 'en' : 'pt'));
+    window.__lang = () => lang;
+    apply(lang);
 
     // reveal on scroll
-    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 }) : null;
     document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+    // ---------- GitHub widget ----------
+    const USER = 'gabrielbuarque';
+    const $ = id => document.getElementById(id);
+    const LANG_COLORS = { TypeScript:'#3178c6', JavaScript:'#f1e05a', HTML:'#e34c26', CSS:'#a78bfa', Shell:'#89e051', Python:'#3572a5', Go:'#00add8', Rust:'#dea584', Dart:'#00b4ab' };
+    const TTL = 30 * 60 * 1000;
+    const S = {
+      pt: { sync: 'sincronizado', down: 'indisponível', none: 'sem atividade pública recente', best: 'melhor dia', events: 'eventos públicos recentes',
+            err: 'Não consegui carregar agora (limite da API). Veja direto em', commit: n => `${n} commit${n > 1 ? 's' : ''} em`, created: t => `criou ${t} em`,
+            pr: a => `${a} PR em`, issue: a => `${a} issue em`, star: 'favoritou', fork: 'fork de', other: t => `${t} em`, month: 'mês', locale: 'pt-BR' },
+      en: { sync: 'synced', down: 'unavailable', none: 'no recent public activity', best: 'best day', events: 'recent public events',
+            err: 'Couldn’t load right now (API rate limit). See it at', commit: n => `${n} commit${n > 1 ? 's' : ''} to`, created: t => `created ${t} in`,
+            pr: a => `${a} PR in`, issue: a => `${a} issue in`, star: 'starred', fork: 'forked', other: t => `${t} in`, month: 'mo', locale: 'en-US' }
+    };
+    const state = {};
 
     const cached = async (key, url) => {
       try { const c = JSON.parse(localStorage.getItem(key)); if (c && Date.now() - c.t < TTL) return c.d; } catch (_) {}
@@ -345,54 +698,59 @@
       try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d })); } catch (_) {}
       return d;
     };
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
     const ago = iso => {
       const s = (Date.now() - new Date(iso)) / 1000;
       if (s < 3600) return Math.max(1, Math.round(s / 60)) + 'min';
       if (s < 86400) return Math.round(s / 3600) + 'h';
       if (s < 86400 * 30) return Math.round(s / 86400) + 'd';
-      return Math.round(s / 86400 / 30) + 'mês';
+      return Math.round(s / 86400 / 30) + S[lang].month;
     };
-    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
-
     function eventText(e) {
-      const repo = esc(e.repo.name.replace(USER + '/', ''));
+      const L = S[lang];
+      const repo = `<b>${esc(e.repo.name.replace(USER + '/', ''))}</b>`;
       const p = e.payload || {};
       switch (e.type) {
-        case 'PushEvent': { const n = p.size || (p.commits || []).length || 1; return ['↑', `${n} commit${n > 1 ? 's' : ''} em <b>${repo}</b>`]; }
-        case 'CreateEvent': return ['+', `criou ${esc(p.ref_type)} em <b>${repo}</b>`];
-        case 'PullRequestEvent': return ['⇄', `${esc(p.action)} PR em <b>${repo}</b>`];
-        case 'IssuesEvent': return ['○', `${esc(p.action)} issue em <b>${repo}</b>`];
-        case 'WatchEvent': return ['★', `favoritou <b>${repo}</b>`];
-        case 'ForkEvent': return ['⑂', `fork de <b>${repo}</b>`];
-        default: return ['·', `${esc(e.type.replace('Event', ''))} em <b>${repo}</b>`];
+        case 'PushEvent': { const n = p.size || (p.commits || []).length || 1; return ['↑', `${L.commit(n)} ${repo}`]; }
+        case 'CreateEvent': return ['+', `${L.created(esc(p.ref_type))} ${repo}`];
+        case 'PullRequestEvent': return ['⇄', `${L.pr(esc(p.action))} ${repo}`];
+        case 'IssuesEvent': return ['○', `${L.issue(esc(p.action))} ${repo}`];
+        case 'WatchEvent': return ['★', `${L.star} ${repo}`];
+        case 'ForkEvent': return ['⑂', `${L.fork} ${repo}`];
+        default: return ['·', `${L.other(esc(e.type.replace('Event', '')))} ${repo}`];
       }
     }
-
-    function renderHeat(days) {
-      const heat = $('heat');
-      const first = new Date(days[0].date + 'T00:00:00').getDay();
-      let html = '<i style="visibility:hidden"></i>'.repeat(first);
-      days.forEach(d => { html += `<i data-l="${d.level}" title="${d.count} contribuições em ${d.date}"></i>`; });
-      heat.innerHTML = html;
-      const best = days.reduce((a, b) => b.count > a.count ? b : a, days[0]);
-      $('heat-best').textContent = best.count ? `melhor dia: ${best.count} em ${best.date.split('-').reverse().slice(0,2).join('/')}` : '';
-      let streak = 0;
-      for (let i = days.length - 1; i >= 0; i--) {
-        if (days[i].count > 0) streak++; else if (i === days.length - 1) continue; else break;
-      }
-      $('s-streak').textContent = streak;
-    }
-
-    // fallback: derive heat map from the last public events
     function daysFromEvents(events) {
       const map = {};
       events.forEach(e => { const k = e.created_at.slice(0, 10); map[k] = (map[k] || 0) + (e.payload && e.payload.size || 1); });
       const out = []; const today = new Date();
       for (let i = 363; i >= 0; i--) {
-        const d = new Date(today - i * 864e5); const k = d.toISOString().slice(0, 10);
+        const k = new Date(today - i * 864e5).toISOString().slice(0, 10);
         const c = map[k] || 0; out.push({ date: k, count: c, level: c === 0 ? 0 : c < 3 ? 1 : c < 6 ? 2 : c < 10 ? 3 : 4 });
       }
       return out;
+    }
+
+    function render() {
+      const L = S[lang];
+      if (state.error) {
+        $('gh-sync').textContent = L.down;
+        $('gh').querySelector('.gh-cols').innerHTML = `<div class="gh-err" style="grid-column:1/-1">${L.err} <a style="color:var(--accent)" href="https://github.com/${USER}">github.com/${USER}</a>.</div>`;
+        return;
+      }
+      if (!state.user) return;
+      $('gh-sync').textContent = `${L.sync} · ${state.at.toLocaleTimeString(L.locale, { hour: '2-digit', minute: '2-digit' })}`;
+      $('feed').innerHTML = state.events.slice(0, 6).map(e => {
+        const [ic, tx] = eventText(e);
+        return `<li><span class="ic">${ic}</span><span>${tx}</span><time>${ago(e.created_at)}</time></li>`;
+      }).join('') || `<li class="skeleton">${L.none}</li>`;
+      if (state.days) {
+        $('s-contrib').textContent = (state.exact ? '' : '≥') + state.total.toLocaleString(L.locale);
+        if (!state.exact) $('heat-range').textContent = L.events;
+        const best = state.days.reduce((a, b) => b.count > a.count ? b : a, state.days[0]);
+        const d = new Date(best.date + 'T12:00:00').toLocaleDateString(L.locale, { day: '2-digit', month: 'short' });
+        $('heat-best').textContent = best.count ? `${L.best}: ${best.count} · ${d}` : '';
+      }
     }
 
     async function load() {
@@ -402,18 +760,12 @@
           cached('gh:repos', `https://api.github.com/users/${USER}/repos?per_page=100&sort=pushed`),
           cached('gh:events', `https://api.github.com/users/${USER}/events/public?per_page=30`)
         ]);
+        Object.assign(state, { user, events, at: new Date() });
         $('gh-name').textContent = user.name || USER;
         $('gh-avatar').src = user.avatar_url + '&s=88';
         $('s-repos').textContent = user.public_repos;
         $('s-follow').textContent = user.followers;
 
-        // feed
-        $('feed').innerHTML = events.slice(0, 6).map(e => {
-          const [ic, tx] = eventText(e);
-          return `<li><span class="ic">${ic}</span><span>${tx}</span><time>${ago(e.created_at)}</time></li>`;
-        }).join('') || '<li class="skeleton">sem atividade pública recente</li>';
-
-        // languages (by repo count, own repos only)
         const counts = {};
         repos.filter(r => !r.fork && r.language).forEach(r => counts[r.language] = (counts[r.language] || 0) + 1);
         const total = Object.values(counts).reduce((a, b) => a + b, 0) || 1;
@@ -421,28 +773,205 @@
         const col = n => LANG_COLORS[n] || '#8b8982';
         $('lang-bar').innerHTML = langs.map(([n, c]) => `<span style="flex:${c};background:${col(n)}" title="${esc(n)}"></span>`).join('');
         $('langs').innerHTML = langs.map(([n, c]) => `<li><i style="background:${col(n)}"></i>${esc(n)}<span>${Math.round(c / total * 100)}%</span></li>`).join('');
+        render();
 
-        $('gh-sync').textContent = 'sincronizado · ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-        // contributions
-        let days, exact = true;
         try {
           const c = await cached('gh:contrib', `https://github-contributions-api.jogruber.de/v4/${USER}?y=last`);
-          days = c.contributions;
-          $('s-contrib').textContent = (c.total && c.total.lastYear != null ? c.total.lastYear : days.reduce((a, d) => a + d.count, 0)).toLocaleString('pt-BR');
+          state.days = c.contributions; state.exact = true;
+          state.total = c.total && c.total.lastYear != null ? c.total.lastYear : c.contributions.reduce((a, d) => a + d.count, 0);
         } catch (_) {
-          days = daysFromEvents(events); exact = false;
-          $('s-contrib').textContent = '≥' + days.reduce((a, d) => a + d.count, 0);
-          $('heat-range').textContent = 'eventos públicos recentes';
+          state.days = daysFromEvents(events); state.exact = false;
+          state.total = state.days.reduce((a, d) => a + d.count, 0);
         }
-        renderHeat(days);
+        const days = state.days;
+        const first = new Date(days[0].date + 'T00:00:00').getDay();
+        $('heat').innerHTML = '<i style="visibility:hidden"></i>'.repeat(first) + days.map(d => `<i data-l="${d.level}" title="${d.count} · ${d.date}"></i>`).join('');
+        let streak = 0;
+        for (let i = days.length - 1; i >= 0; i--) {
+          if (days[i].count > 0) streak++; else if (i === days.length - 1) continue; else break;
+        }
+        $('s-streak').textContent = streak;
+        render();
       } catch (err) {
-        $('gh').querySelector('.gh-cols').innerHTML = '<div class="gh-err" style="grid-column:1/-1">Não consegui carregar agora (limite da API). Veja direto em <a style="color:var(--accent)" href="https://github.com/' + USER + '">github.com/' + USER + '</a>.</div>';
-        $('gh-sync').textContent = 'indisponível';
+        state.error = true; render();
       }
     }
+    window.addEventListener('langchange', render);
     load();
   })();
+  </script>
+
+  <!-- 3D hero: a living memory graph — agents (orange hubs) exchanging context along a knowledge network -->
+  <script type="module">
+    const canvas = document.getElementById('scene');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let THREE;
+    try { THREE = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js'); }
+    catch (_) { canvas.remove(); }
+
+    if (THREE) {
+      let renderer;
+      try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' }); }
+      catch (_) { canvas.remove(); renderer = null; }
+
+      if (renderer) {
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+        camera.position.set(0, 0, 6.2);
+
+        const ACCENT = new THREE.Color('#f28b54');
+        const WARM = new THREE.Color('#f2f0ea');
+        const DIM = new THREE.Color('#6b5e52');
+
+        // soft round sprite
+        const tex = (() => {
+          const c = document.createElement('canvas'); c.width = c.height = 64;
+          const g = c.getContext('2d'); const gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+          gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(.25, 'rgba(255,255,255,.85)');
+          gr.addColorStop(.6, 'rgba(255,255,255,.18)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+          g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+          const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+        })();
+
+        // seeded random so the graph is the same on every visit
+        let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+        const N = 240, HUBS = 14;
+        const pos = [];
+        const golden = Math.PI * (3 - Math.sqrt(5));
+        for (let i = 0; i < N; i++) {
+          const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = golden * i;
+          const R = 1.75 * (0.62 + 0.42 * rnd());
+          pos.push(new THREE.Vector3(Math.cos(th) * r * R, y * R * 0.92, Math.sin(th) * r * R));
+        }
+        const hubIdx = new Set(); while (hubIdx.size < HUBS) hubIdx.add(Math.floor(rnd() * N));
+
+        // edges: k nearest neighbours
+        const edges = []; const adj = Array.from({ length: N }, () => []); const seen = new Set();
+        for (let i = 0; i < N; i++) {
+          const d = pos.map((p, j) => [j, p.distanceToSquared(pos[i])]).filter(([j]) => j !== i).sort((a, b) => a[1] - b[1]);
+          const k = hubIdx.has(i) ? 6 : 3;
+          for (let m = 0; m < k; m++) {
+            const j = d[m][0]; if (d[m][1] > 0.9) break;
+            const key = i < j ? i + '-' + j : j + '-' + i; if (seen.has(key)) continue;
+            seen.add(key); const e = edges.length; edges.push([i, j]); adj[i].push(e); adj[j].push(e);
+          }
+        }
+
+        const group = new THREE.Group(); scene.add(group);
+
+        // lines
+        const lp = new Float32Array(edges.length * 6), lc = new Float32Array(edges.length * 6);
+        edges.forEach(([a, b], e) => {
+          pos[a].toArray(lp, e * 6); pos[b].toArray(lp, e * 6 + 3);
+          const hot = hubIdx.has(a) || hubIdx.has(b) ? ACCENT : DIM;
+          hot.toArray(lc, e * 6); hot.toArray(lc, e * 6 + 3);
+        });
+        const lg = new THREE.BufferGeometry();
+        lg.setAttribute('position', new THREE.BufferAttribute(lp, 3)); lg.setAttribute('color', new THREE.BufferAttribute(lc, 3));
+        const lines = new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: .22, blending: THREE.AdditiveBlending, depthWrite: false }));
+        group.add(lines);
+
+        // nodes
+        const np = new Float32Array(N * 3); pos.forEach((p, i) => p.toArray(np, i * 3));
+        const ng = new THREE.BufferGeometry(); ng.setAttribute('position', new THREE.BufferAttribute(np, 3));
+        const nodeMat = new THREE.PointsMaterial({ size: .07, map: tex, color: WARM, transparent: true, opacity: .75, depthWrite: false, blending: THREE.AdditiveBlending });
+        group.add(new THREE.Points(ng, nodeMat));
+
+        // agent hubs
+        const hp = new Float32Array(HUBS * 3); [...hubIdx].forEach((i, n) => pos[i].toArray(hp, n * 3));
+        const hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.BufferAttribute(hp, 3));
+        const hubMat = new THREE.PointsMaterial({ size: .26, map: tex, color: ACCENT, transparent: true, opacity: .95, depthWrite: false, blending: THREE.AdditiveBlending });
+        group.add(new THREE.Points(hg, hubMat));
+
+        // core: shared memory
+        const core = new THREE.LineSegments(
+          new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(.55, 1)),
+          new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: .28, blending: THREE.AdditiveBlending, depthWrite: false })
+        );
+        group.add(core);
+        const coreGlow = new THREE.Points(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(new Float32Array([0, 0, 0]), 3)),
+          new THREE.PointsMaterial({ size: 1.6, map: tex, color: ACCENT, transparent: true, opacity: .35, depthWrite: false, blending: THREE.AdditiveBlending }));
+        group.add(coreGlow);
+
+        // orbit ring (context window)
+        const ringPts = []; for (let i = 0; i <= 128; i++) { const a = i / 128 * Math.PI * 2; ringPts.push(new THREE.Vector3(Math.cos(a) * 2.45, 0, Math.sin(a) * 2.45)); }
+        const ring = new THREE.Line(new THREE.BufferGeometry().setFromPoints(ringPts), new THREE.LineDashedMaterial({ color: '#5d5b55', dashSize: .05, gapSize: .07, transparent: true, opacity: .6 }));
+        ring.computeLineDistances(); ring.rotation.x = 1.2; ring.rotation.z = .3; group.add(ring);
+
+        // signals: pulses walking the graph
+        const P = 46;
+        const pulses = Array.from({ length: P }, () => {
+          const e = Math.floor(rnd() * edges.length); return { e, from: edges[e][0], t: rnd(), v: .35 + rnd() * .6 };
+        });
+        const pp = new Float32Array(P * 3);
+        const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pp, 3));
+        const pulseMat = new THREE.PointsMaterial({ size: .13, map: tex, color: '#ffb38a', transparent: true, opacity: 1, depthWrite: false, blending: THREE.AdditiveBlending });
+        group.add(new THREE.Points(pg, pulseMat));
+        const tmp = new THREE.Vector3();
+
+        document.getElementById('hud-nodes').textContent = N;
+        document.getElementById('hud-edges').textContent = edges.length;
+        const hudSig = document.getElementById('hud-sig');
+
+        // interaction
+        const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+        addEventListener('pointermove', e => { mouse.tx = (e.clientX / innerWidth - .5) * 2; mouse.ty = (e.clientY / innerHeight - .5) * 2; }, { passive: true });
+
+        function resize() {
+          const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
+          renderer.setSize(w, h, false); camera.aspect = w / h;
+          camera.position.z = w < 700 ? 7.4 : 6.2;
+          camera.updateProjectionMatrix();
+        }
+        new ResizeObserver(resize).observe(canvas); resize();
+
+        let visible = true, last = performance.now(), time = 0;
+        new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) { last = performance.now(); loop(); } }).observe(canvas);
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) { last = performance.now(); loop(); } });
+
+        function step(dt) {
+          time += dt;
+          mouse.x += (mouse.tx - mouse.x) * .04; mouse.y += (mouse.ty - mouse.y) * .04;
+          const scroll = Math.min(1, scrollY / (innerHeight * .9));
+          group.rotation.y += dt * .09;
+          group.rotation.x = .25 + mouse.y * .25 + scroll * .5;
+          group.rotation.z = mouse.x * -.12;
+          group.position.y = scroll * .9;
+          const s = 1 + scroll * .25; group.scale.setScalar(s);
+          core.rotation.x -= dt * .25; core.rotation.y -= dt * .35;
+          const breathe = 1 + Math.sin(time * 1.6) * .06; core.scale.setScalar(breathe);
+          coreGlow.material.opacity = .28 + Math.sin(time * 1.6) * .08;
+          hubMat.size = .24 + Math.sin(time * 2.2) * .03;
+          let moving = 0;
+          pulses.forEach((p, i) => {
+            p.t += dt * p.v;
+            if (p.t >= 1) {
+              const [a, b] = edges[p.e]; const at = p.from === a ? b : a;
+              const opts = adj[at].filter(e => e !== p.e);
+              p.e = opts.length ? opts[Math.floor(Math.random() * opts.length)] : p.e;
+              p.from = at; p.t = 0;
+            }
+            const [a, b] = edges[p.e]; const A = p.from === a ? pos[a] : pos[b], B = p.from === a ? pos[b] : pos[a];
+            tmp.lerpVectors(A, B, p.t).toArray(pp, i * 3); moving++;
+          });
+          pg.attributes.position.needsUpdate = true;
+          hudSig.textContent = moving;
+        }
+
+        let raf = 0;
+        function loop() {
+          cancelAnimationFrame(raf);
+          if (!visible || document.hidden) return;
+          const now = performance.now(); const dt = Math.min(.05, (now - last) / 1000); last = now;
+          step(dt); renderer.render(scene, camera);
+          raf = requestAnimationFrame(loop);
+        }
+        if (reduce) { step(0.016); renderer.render(scene, camera); hudSig.textContent = P; }
+        else loop();
+      }
+    }
   </script>
 </body>
 </html>
