@@ -298,6 +298,7 @@ summary:                    # box "Em 30 segundos" (exatamente 3 bullets)
 # translation: slug-da-versao-em-ingles
 # updated: 2026-10-27
 # draft: true               # não publica
+# noindex: true             # publica, mas fica fora do Google, sitemap, RSS e llms.txt
 ---
 ```
 
