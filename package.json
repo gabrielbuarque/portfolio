@@ -1,0 +1,25 @@
+{
+  "name": "nnex-us",
+  "private": true,
+  "type": "module",
+  "description": "Gabriel Buarque — portfolio and blog (nnex.us)",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs --drafts && node scripts/serve.mjs",
+    "new": "node scripts/new-post.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "gray-matter": "4.0.3",
+    "highlight.js": "11.12.0",
+    "html-minifier-terser": "7.2.0",
+    "image-size": "1.2.1",
+    "marked": "15.0.12",
+    "node-html-parser": "7.1.0",
+    "satori": "0.12.2",
+    "terser": "5.51.2"
+  }
+}

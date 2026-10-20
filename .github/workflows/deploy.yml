@@ -1,0 +1,63 @@
+# Builds the site on every push to main (and on demand), then asks Easypanel to redeploy
+# and waits until every published post answers on https://nnex.us.
+#
+# One-time setup: copy the "Deploy webhook" URL from Easypanel
+# (nnexus → portfolio → Implantações) and save it as a repository secret:
+#   gh secret set EASYPANEL_DEPLOY_URL --repo gabrielbuarque/portfolio
+name: Build & deploy nnex.us
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-nnex
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Build static site
+        run: node build.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate Docker image (includes nginx -t)
+        run: docker build -t nnex-site .
+      - name: Summary
+        run: |
+          echo "### Build OK" >> "$GITHUB_STEP_SUMMARY"
+          node scripts/posts.mjs --markdown >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    name: Deploy to Easypanel
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Trigger Easypanel deploy
+        env:
+          HOOK: ${{ secrets.EASYPANEL_DEPLOY_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::Secret EASYPANEL_DEPLOY_URL is not set. See the comment at the top of this workflow."
+            exit 1
+          fi
+          curl -fsS -X POST "$HOOK" -o /dev/null
+          echo "Deploy triggered."
+      - name: Wait until the site and every post are live
+        run: node scripts/wait-live.mjs
