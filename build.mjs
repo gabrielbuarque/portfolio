@@ -111,13 +111,13 @@ const header = (lang, switchTo) => {
 };
 const footer = () => `<footer><div class="wrap foot"><span>Gabriel Buarque · Natal, RN</span><span><a href="/blog/feed.xml">RSS</a> · <a href="/llms.txt">llms.txt</a> · nnex.us · © ${TODAY.slice(0, 4)}</span></div></footer>`;
 
-function page({ lang, title, desc, url, alternates = {}, image = `${SITE}/og.png`, imageAlt = title, type = 'website', jsonld = '', css = '', body, script = '', extraHead = '' }) {
+function page({ noindex = false, lang, title, desc, url, alternates = {}, image = `${SITE}/og.png`, imageAlt = title, type = 'website', jsonld = '', css = '', body, script = '', extraHead = '' }) {
   const U = UI[lang];
   const alt = Object.entries(alternates).map(([l, href]) => `<link rel="alternate" hreflang="${l}" href="${href}">`).join('');
   return `<!DOCTYPE html><html lang="${U.locale === 'pt-BR' ? 'pt-BR' : 'en'}"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0e0e0d"><meta name="color-scheme" content="dark">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="author" content="Gabriel Buarque">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"><link rel="canonical" href="${url}">${alt}
+<meta name="robots" content="${noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'}"><link rel="canonical" href="${url}">${alt}
 <link rel="alternate" type="application/rss+xml" title="Blog — Gabriel Buarque" href="${SITE}/blog/feed.xml"><link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt">
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="Gabriel Buarque"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${url}"><meta property="og:image" content="${image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${esc(imageAlt)}"><meta property="og:locale" content="${U.og}">
@@ -159,7 +159,7 @@ async function loadPosts() {
       tags: (data.tags || []).map(String), summary: (data.summary || []).map(String),
       cover: data.cover || null, coverAlt: data.cover_alt || data.title, coverCaption: data.cover_caption || '',
       audio: data.audio || null, translation: data.translation ? slugify(data.translation) : null,
-      draft: !!data.draft || isTemplate,
+      draft: !!data.draft || isTemplate, noindex: !!data.noindex,
       path: `/blog/${slug}/`, url: `${SITE}/blog/${slug}/`, image: `${SITE}/blog/${slug}/og.png`
     });
   }
@@ -221,7 +221,7 @@ ${more.length ? `<section class="more"><div class="wrap"><h2>${U.related}</h2><u
 </main>`;
 
   write(`blog/${p.slug}/index.html`, await page({
-    lang, title: `${p.title} — Gabriel Buarque`, desc: p.description, url: p.url, alternates, image: p.image, imageAlt: p.title, type: 'article', jsonld, css: BLOG_CSS, body,
+    noindex: p.noindex, lang, title: `${p.title} — Gabriel Buarque`, desc: p.description, url: p.url, alternates, image: p.image, imageAlt: p.title, type: 'article', jsonld, css: BLOG_CSS, body,
     script: `<script>${BLOG_JS}</script>`,
     extraHead: `<meta property="article:published_time" content="${p.date}"><meta property="article:modified_time" content="${p.updated || p.date}"><meta property="article:author" content="${SITE}/">${p.tags.map(t => `<meta property="article:tag" content="${esc(t)}">`).join('')}`
   }));
@@ -295,7 +295,8 @@ async function buildHome(lang, posts) {
 }
 
 // ---------- SEO / GEO files ----------
-function seoFiles(posts) {
+function seoFiles(allPosts) {
+  const posts = allPosts.filter(p => !p.noindex);
   const urls = [
     { loc: `${SITE}/`, alt: { 'pt-BR': `${SITE}/`, en: `${SITE}/en/`, 'x-default': `${SITE}/` }, lastmod: TODAY, pr: '1.0' },
     { loc: `${SITE}/en/`, alt: { 'pt-BR': `${SITE}/`, en: `${SITE}/en/`, 'x-default': `${SITE}/` }, lastmod: TODAY, pr: '0.9' },
