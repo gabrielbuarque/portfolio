@@ -1,6 +1,6 @@
 ---
 name: update-nnexus-blog
-description: Transforma a transcrição de um áudio do Gabriel Buarque contando a semana dele em um artigo para o blog nnex.us/blog, escrito na voz dele, mostra a prévia e só publica depois da aprovação. Use quando o Gabriel mandar uma transcrição, notas de voz ou um resumo da semana e pedir um artigo, "atualizar o blog", "publicar no nnex.us" ou "Update Nnexus Blog".
+description: Transforma a transcrição de um áudio do Gabriel Buarque contando a semana dele em um artigo para o blog nnex.us/blog, em pt-BR e em inglês, escrito na voz dele, mostra a prévia e só publica depois da aprovação. Use quando o Gabriel mandar uma transcrição, notas de voz ou um resumo da semana e pedir um artigo, "atualizar o blog", "publicar no nnex.us" ou "Update Nnexus Blog".
 ---
 
 # Update Nnexus Blog
@@ -13,7 +13,7 @@ O fluxo:
 2. **Classificar** em um pilar antes de escrever qualquer coisa.
 3. **Extrair** dos próprios termos dele: o que aconteceu, as frases boas e a única lição.
 4. **Filtrar**: confidencialidade, reconhecimento de pessoas e ressentimento.
-5. **Escrever** na voz do Gabriel, não na sua.
+5. **Escrever** na voz do Gabriel, não na sua: o original em pt-BR e a adaptação em inglês.
 6. **Checar** voz, números e fontes.
 7. **Mostrar a prévia**, esperar a aprovação, **publicar** e entregar os posts para as redes.
 
@@ -54,7 +54,7 @@ Leia tudo antes de escrever e monte, citando trechos **exatos** da transcrição
 - **Números** que ele disse (tempo, volume, custo, erros, testes).
 - **Ferramentas**, **links**, **repositórios**, **prints** e **vídeos** citados.
 - **Dúvidas**: tudo que ficou ambíguo vira pergunta na prévia, não suposição.
-- **Ângulos que sobraram**: vão para o backlog (seção 12).
+- **Ângulos que sobraram**: vão para o backlog (seção 13).
 
 Rascunhe a partir das palavras dele, nunca de um resumo genérico do tema. A transcrição sempre ganha de qualquer ideia sua sobre o assunto.
 
@@ -74,7 +74,7 @@ A transcrição pode citar clientes, colegas, valores, credenciais e dados de em
 **Reconhecimento.** Quem lê não pode identificar as pessoas da história, e as próprias pessoas não podem se reconhecer nela.
 - Tire as digitais: tempo de relacionamento, onde se conheceram, o que venderam um para o outro, contagens exatas, cidade, detalhes do negócio. Se o ponto depender de um número, arredonde.
 - Nomes de ferramentas e tecnologias **ficam** (são o assunto do blog); nomes de produtos de clientes saem.
-- **O teste:** a pessoa da história se reconheceria? Se sim, generalize de novo. Se o ponto não sobrevive à generalização, o trecho vai para "Pendente de confirmação" (seção 12) em vez de entrar no texto.
+- **O teste:** a pessoa da história se reconheceria? Se sim, generalize de novo. Se o ponto não sobrevive à generalização, o trecho vai para "Pendente de confirmação" (seção 13) em vez de entrar no texto.
 - Marcar alguém nas redes só em post que elogia a pessoa, nunca em um que tira lição da situação dela.
 
 **Sem marcação de tempo relativa.** O post é lido meses depois. Nada de "ontem", "semana passada", "hoje de manhã", "há três semanas" ou mês e evento nomeados no título, no gancho, no corpo ou nos posts das redes. A data já está no post. Use "Em um projeto recente...", "Quando comecei a...", ou nenhuma marcação.
@@ -128,7 +128,7 @@ Um artigo, **uma ideia central** (a virada da seção 3). Se a semana teve vári
 - Se eles se conectam (ex.: "automatizei o onboarding e isso mudou como uso agentes"), vira um artigo com seções.
 - Se não se conectam, o principal vira o artigo e o resto vai para o backlog, ou para uma seção curta "Outras coisas que fiz" se tiver valor por si.
 
-**Cadência:** o blog é semanal. A entrega padrão por áudio é **1 artigo + os posts das redes que derivam dele** (seção 14). Não produza vários artigos de um áudio só para "ter estoque"; ângulos extras vão para o backlog.
+**Cadência:** o blog é semanal. A entrega padrão por áudio é **1 artigo (em pt-BR e inglês) + os posts das redes que derivam dele** (seção 15). Não produza vários artigos de um áudio só para "ter estoque"; ângulos extras vão para o backlog.
 
 Título (até ~70 caracteres), concreto e específico. Bons formatos:
 - "Como [fiz X] com [ferramenta] e [resultado]"
@@ -138,12 +138,37 @@ Título (até ~70 caracteres), concreto e específico. Bons formatos:
 
 Evite títulos genéricos ("Minha semana", "Reflexões sobre IA") e títulos com marcação de tempo ("O que fiz esta semana").
 
-## 8. Estrutura do artigo
+## 8. Versão em inglês (todo artigo sai nos dois idiomas)
+
+Todo artigo é publicado em **pt-BR e em inglês**, no mesmo commit. O pt-BR é o original, escrito a partir das palavras dele; o inglês é uma **adaptação**, não uma tradução literal. As duas versões ficam ligadas no site (troca de idioma no topo, "Read in English" / "Ler em português", hreflang para o Google).
+
+**O que fica igual**
+- Os mesmos fatos, a mesma lição, a mesma estrutura de seções e os mesmos blocos, imagens, links e embeds.
+- Os mesmos números, no formato do inglês: milhar com vírgula ("3,586"), decimal com ponto, `%` colado ("17%"). Valores em reais continuam como faixa; não converta moeda, a menos que ele peça.
+- Os mesmos filtros (seção 4), a mesma checagem de voz e de números (seções 5 e 6) e a mesma checagem final (seção 12), aplicados também à versão em inglês.
+
+**O que muda**
+- **Título, `description` e slug** são escritos para quem busca em inglês, não traduzidos palavra por palavra. O slug é em inglês (`automating-onboarding-with-n8n`).
+- **Tags** em inglês, com o pilar primeiro: `automation`, `agents`, `architecture`, `product`, `research`.
+- **Contexto para leitor de fora do Brasil**: explique em poucas palavras o que é local ("Brazil's data protection law (LGPD)", "Pix, Brazil's instant payment system").
+- **Frases dele**: preserve o sentido e o tom, não a construção. Expressão idiomática vira o equivalente natural em inglês.
+
+**A voz em inglês**: a mesma do pt-BR. Primeira pessoa, frases curtas, direto e calmo, explicando o porquê e o trade-off. Inglês americano. Sem travessão no corpo. Sem o vocabulário típico de texto gerado por IA: "game-changer", "revolutionary", "unlock", "leverage", "delve", "seamless", "robust", "in today's fast-paced world", "let's dive in", "it's not just X, it's Y".
+
+**Arquivos**
+- pt-BR: `content/blog/AAAA-MM-DD-slug.md` → `https://nnex.us/blog/<slug>/`
+- inglês: `content/blog/en/AAAA-MM-DD-english-slug.md` → `https://nnex.us/en/blog/<english-slug>/`
+- No frontmatter da versão em inglês, coloque `translation: <slug-em-pt>`. Basta um lado; o build liga os dois.
+- A imagem de compartilhamento de cada versão é gerada no próprio idioma.
+
+Se ele pedir explicitamente só um idioma, faça só um e avise que o post vai aparecer nos dois índices do blog, com um selo de idioma, até ganhar a outra versão.
+
+## 9. Estrutura do artigo
 
 Entre 600 e 1.400 palavras (de 3 a 7 minutos de leitura). Leitura rápida: quem só passar o olho pelos subtítulos e pelo resumo tem que entender o essencial.
 
 ```
-frontmatter (ver seção 10)
+frontmatter (ver seção 11)
 
 Abertura (2–3 parágrafos curtos): gancho (de preferência uma frase dele), o problema ou a situação, por que importava. Sem marcação de tempo.
 
@@ -159,7 +184,7 @@ Adapte os subtítulos ao assunto; eles devem dizer algo ("Por que tirei o agente
 
 O campo `summary` (3 bullets) vira o box "Em 30 segundos" no topo. Ele precisa responder: o que foi feito, o resultado e o principal aprendizado. Também é o que os mecanismos de resposta (ChatGPT, Perplexity, Google AI) mais citam, então use frases completas e factuais.
 
-## 9. Blocos disponíveis (template dinâmico)
+## 10. Blocos disponíveis (template dinâmico)
 
 O artigo é Markdown normal (títulos `##`, **negrito**, [links](https://…), listas, tabelas, citações `>`, `código`) mais blocos especiais. **Cada bloco especial é um bloco de código cuja linguagem é o nome do bloco.** Copie exatamente:
 
@@ -278,7 +303,7 @@ Quer automatizar algo parecido? | mailto:buarquegabriel01@gmail.com | Fale comig
 
 Use os blocos com moderação: no máximo de 3 a 5 por artigo, só quando ajudam a ler mais rápido.
 
-## 10. Frontmatter
+## 11. Frontmatter
 
 ```yaml
 ---
@@ -291,24 +316,38 @@ summary:                    # box "Em 30 segundos" (exatamente 3 bullets)
   - "O resultado, com número se houver."
   - "O principal aprendizado."
 # opcionais:
-# lang: en                  # padrão: pt
 # cover: /blog/media/<slug>/capa.webp
 # cover_alt: "Descrição da capa"
 # audio: /blog/media/<slug>/audio.mp3   # player "Ouça na minha voz" no topo
-# translation: slug-da-versao-em-ingles
 # updated: 2026-10-27
 # draft: true               # não publica
 # noindex: true             # publica, mas fica fora do Google, sitemap, RSS e llms.txt
 ---
 ```
 
+A versão em inglês usa o mesmo formato, com tudo em inglês, mais a ligação com o original:
+
+```yaml
+---
+title: "How I automated onboarding with n8n"
+description: "One sentence, 140–160 characters, written for English search and for the LinkedIn card."
+date: 2026-10-20
+tags: [automation, n8n, AI]
+summary:
+  - "What was done."
+  - "The result, with a number if there is one."
+  - "The main lesson."
+translation: automatizei-o-onboarding-com-n8n   # slug da versão em pt-BR
+---
+```
+
 A primeira tag é a do pilar (seção 2): `automação`, `agentes`, `arquitetura`, `produto` ou `pesquisa`. As outras (1 a 3) dizem o assunto: `IA`, `n8n`, `Dify`, `MCP`, `memória`, `infraestrutura`, `IndiqAI`, `Nnexus`, `aprendizados`, `open source`.
 
-**Nome do arquivo:** `content/blog/AAAA-MM-DD-slug.md`. Slug curto, sem acentos, só com hífens (ex.: `2026-10-20-automatizei-o-onboarding-com-n8n.md`). A URL final é `https://nnex.us/blog/<slug>/` (sem a data).
+**Nomes dos arquivos:** pt-BR em `content/blog/AAAA-MM-DD-slug.md`, inglês em `content/blog/en/AAAA-MM-DD-english-slug.md`. Slug curto, sem acentos, só com hífens (ex.: `2026-10-20-automatizei-o-onboarding-com-n8n.md` e `en/2026-10-20-automating-onboarding-with-n8n.md`). As URLs finais são `https://nnex.us/blog/<slug>/` e `https://nnex.us/en/blog/<english-slug>/` (sem a data).
 
-A imagem de compartilhamento (og:image) é **gerada automaticamente** a partir do título, das tags e da data. Não precisa criar capa.
+A imagem de compartilhamento (og:image) é **gerada automaticamente** para cada versão, a partir do título, das tags e da data. Não precisa criar capa.
 
-## 11. Checagem final (o rascunho reprova se...)
+## 12. Checagem final (o rascunho reprova se...)
 
 Rode antes de mostrar a prévia. Qualquer item marcado reprova o rascunho: corrija e rode de novo.
 
@@ -337,53 +376,64 @@ Rode antes de mostrar a prévia. Qualquer item marcado reprova o rascunho: corri
 - [ ] `description` fora de 140 a 160 caracteres
 - [ ] `summary` sem exatamente 3 bullets factuais
 - [ ] Fora de 600 a 1.400 palavras (ou 300 a 500 numa nota curta)
-- [ ] Bloco especial com sintaxe diferente da seção 9, ou link externo sem `https://`
+- [ ] Bloco especial com sintaxe diferente da seção 10, ou link externo sem `https://`
 
-## 12. Prévia (sempre antes de publicar)
+**Inglês (seção 8)**
+- [ ] Falta a versão em inglês, ou ela não tem `translation:` apontando para o slug em pt-BR
+- [ ] As versões divergem em fatos, números, lição, seções ou blocos
+- [ ] O inglês soa traduzido ao pé da letra, ou usa vocabulário de texto gerado por IA
+- [ ] Título, `description`, slug ou tags em inglês ficaram em português
+
+Rode a checagem inteira nas duas versões.
+
+## 13. Prévia (sempre antes de publicar)
 
 Mostre nesta ordem:
 
 1. **Classificação**: pilar, tipo (artigo ou nota curta) e a lição central em uma frase.
-2. **Card de compartilhamento**: título, `description` e URL final `https://nnex.us/blog/<slug>/` (é assim que aparece no LinkedIn e no WhatsApp).
-3. **O artigo renderizado** (Markdown normal no chat).
-4. **O arquivo completo** em um bloco de código `markdown` (frontmatter + corpo), pronto para commit.
+2. **Cards de compartilhamento** das duas versões: título, `description` e URL final (`https://nnex.us/blog/<slug>/` e `https://nnex.us/en/blog/<english-slug>/`). É assim que aparecem no LinkedIn e no WhatsApp.
+3. **O artigo em pt-BR renderizado** (Markdown normal no chat). Da versão em inglês, mostre o título, a `description`, o `summary` e a abertura; o texto inteiro vai no arquivo.
+4. **Os dois arquivos completos**, cada um em um bloco de código `markdown` (frontmatter + corpo), prontos para commit.
 5. **O que foi filtrado**: o que saiu por confidencialidade ou reconhecimento e o que foi generalizado ou arredondado, para ele conferir que o sentido ficou certo.
 6. **Pendente de confirmação**: tudo que precisa do "ok" dele antes de ir ao ar (números desidentificados, nomes, histórias que o envolvem negativamente, se um ângulo pessoal pode entrar). Junte numa lista só, em vez de interromper o trabalho com perguntas soltas. O que estiver aqui não vai para o texto até ele confirmar.
 7. **Backlog**: os ângulos que sobraram, um por linha, com o pilar e a frase dele que sustenta cada um. São pautas para semanas fracas. Se houver um lugar privado para guardar (Nnexus), sugira salvar lá.
 
+A aprovação vale para as duas versões. Se ele mudar algo no pt-BR, reflita no inglês antes de publicar.
+
 Pergunte: "Quer ajustar algo ou posso publicar?" e espere. Aplique os ajustes e mostre a prévia de novo se mudar algo relevante.
 
-## 13. Publicar
+## 14. Publicar
 
-Repositório: **`gabrielbuarque/portfolio`**, branch **`main`**. Um push em `main` dispara o workflow **"Build & deploy nnex.us"**: ele gera o site, valida, faz o deploy no Easypanel e espera o post responder em `nnex.us`. Leva de 3 a 6 minutos.
+Repositório: **`gabrielbuarque/portfolio`**, branch **`main`**. Um push em `main` dispara o workflow **"Build & deploy nnex.us"**: ele gera o site, valida, faz o deploy no Easypanel e espera as duas versões responderem em `nnex.us`. Leva de 3 a 6 minutos.
 
 **A) Se você tem acesso de escrita ao GitHub** (conector, API, Codex, Claude Code, git):
-1. Crie `content/blog/AAAA-MM-DD-slug.md` com o conteúdo aprovado.
+1. Crie os dois arquivos aprovados: `content/blog/AAAA-MM-DD-slug.md` e `content/blog/en/AAAA-MM-DD-english-slug.md`.
 2. Se houver imagens ou áudio, envie-os para `content/blog/media/<slug>/` (de preferência `.webp` com até 1600px de largura e `.mp3` para áudio).
-3. Commit em `main` com a mensagem `blog: <título>`.
-4. Acompanhe o workflow em `https://github.com/gabrielbuarque/portfolio/actions`. Quando terminar, confira se `https://nnex.us/blog/<slug>/` abre.
+3. Um único commit em `main` com os dois arquivos e a mensagem `blog: <título em pt-BR>`.
+4. Acompanhe o workflow em `https://github.com/gabrielbuarque/portfolio/actions`. Quando terminar, confira se `https://nnex.us/blog/<slug>/` e `https://nnex.us/en/blog/<english-slug>/` abrem.
 
 **B) Se você não tem acesso de escrita:**
-1. Entregue o arquivo final em um bloco de código.
-2. Passe este link para o Gabriel criar o arquivo pelo navegador (ele cola o conteúdo e clica em "Commit changes"):
-   `https://github.com/gabrielbuarque/portfolio/new/main/content/blog?filename=AAAA-MM-DD-slug.md`
+1. Entregue os dois arquivos finais, cada um em um bloco de código.
+2. Passe estes links para o Gabriel criar os arquivos pelo navegador (ele cola o conteúdo e clica em "Commit changes"):
+   - pt-BR: `https://github.com/gabrielbuarque/portfolio/new/main/content/blog?filename=AAAA-MM-DD-slug.md`
+   - inglês: `https://github.com/gabrielbuarque/portfolio/new/main/content/blog/en?filename=AAAA-MM-DD-english-slug.md`
 3. Imagens: `https://github.com/gabrielbuarque/portfolio/upload/main/content/blog/media/<slug>`
 
-Para despublicar ou corrigir, edite o mesmo arquivo (com `draft: true` o post sai do ar) e faça commit de novo.
+Para despublicar ou corrigir, edite os mesmos arquivos (com `draft: true` o post sai do ar) e faça commit de novo. Uma correção de fato vale para as duas versões.
 
-## 14. Posts para as redes
+## 15. Posts para as redes
 
-Entregue junto com o link do post, na voz dele e passando pelos mesmos filtros (seção 4) e pela mesma checagem (seção 11). **Cada post se sustenta sozinho**: quem não clicar no link ainda leva a ideia. O link é bônus, não a razão do post.
+Entregue junto com o link do post, na voz dele e passando pelos mesmos filtros (seção 4) e pela mesma checagem (seção 12). **Cada post se sustenta sozinho**: quem não clicar no link ainda leva a ideia. O link é bônus, não a razão do post.
 
-- **LinkedIn** (de 600 a 1.200 caracteres): o gancho na primeira linha, de preferência uma frase dele. Depois, de 2 a 4 linhas curtas com a lição e o mecanismo ou o resultado. O link vai no fim. No máximo 3 hashtags.
-- **X** (até 280 caracteres): uma frase com o insight e o link.
-- **WhatsApp/Telegram** (1 a 2 linhas): o que é e o link.
+- **LinkedIn, em pt-BR e em inglês** (de 600 a 1.200 caracteres cada): o gancho na primeira linha, de preferência uma frase dele. Depois, de 2 a 4 linhas curtas com a lição e o mecanismo ou o resultado. O link da versão no mesmo idioma vai no fim. No máximo 3 hashtags. O texto em inglês é escrito para o público de fora, não traduzido do post em português.
+- **X, em pt-BR e em inglês** (até 280 caracteres cada): uma frase com o insight e o link no mesmo idioma.
+- **WhatsApp/Telegram** (1 a 2 linhas, em pt-BR): o que é e o link.
 
 Varie o tipo de gancho de uma semana para outra: frase dele, número, erro que ele cometeu, decisão contraintuitiva, pergunta. Não repita o mesmo formato duas semanas seguidas. Marque pessoas só em post que as elogia.
 
 Os botões de compartilhar (LinkedIn, X, WhatsApp, e-mail, copiar link) e o card com imagem já aparecem no post sozinhos.
 
-## 15. Quando o Gabriel corrige
+## 16. Quando o Gabriel corrige
 
 As correções dele são a melhor fonte para melhorar esta skill.
 
@@ -391,6 +441,6 @@ As correções dele são a melhor fonte para melhorar esta skill.
 - Se ela muda uma regra (uma palavra que ele não usa, um tipo de história que não quer contar, um formato de título que não gosta), aplique no artigo **e** proponha a mudança exata para este SKILL.md (seção e texto), para não repetir o erro.
 - Quando uma regra mudar, confira os rascunhos que ainda não foram publicados e ajuste-os à regra nova antes de seguir.
 
-## 16. Ouça na minha voz (futuro)
+## 17. Ouça na minha voz (futuro)
 
-O template já tem suporte a áudio: quando houver o MP3 do artigo lido com a voz clonada do Gabriel, envie para `content/blog/media/<slug>/audio.mp3` e adicione `audio: /blog/media/<slug>/audio.mp3` no frontmatter. O player "Ouça na minha voz" aparece no topo do artigo, e o áudio entra nos dados estruturados (AudioObject). Para gerar o roteiro de leitura, use o texto do artigo sem os blocos de código e sem as tabelas.
+O template já tem suporte a áudio: quando houver o MP3 do artigo lido com a voz clonada do Gabriel, envie para `content/blog/media/<slug>/audio.mp3` e adicione `audio: /blog/media/<slug>/audio.mp3` no frontmatter. Cada idioma tem o próprio áudio: a versão em inglês usa `audio-en.mp3` no mesmo diretório, no frontmatter do arquivo em inglês. O player "Ouça na minha voz" aparece no topo do artigo, e o áudio entra nos dados estruturados (AudioObject). Para gerar o roteiro de leitura, use o texto do artigo sem os blocos de código e sem as tabelas.

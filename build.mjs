@@ -1,7 +1,9 @@
 // Builds the static site into dist/:
 //   /            home (PT)          /en/          home (EN)
 //   /blog/       blog index (PT)    /en/blog/     blog index (EN)
-//   /blog/<slug>/  one page per post in content/blog/*.md  (+ /blog/<slug>.md raw copy for LLMs)
+//   /blog/<slug>/     PT posts from content/blog/*.md     (+ /blog/<slug>.md raw copy for LLMs)
+//   /en/blog/<slug>/  EN posts from content/blog/en/*.md  (+ /en/blog/<slug>.md)
+//   Every post should exist in both languages, linked with "translation:" (one side is enough).
 //   og images, sitemap.xml, robots.txt, llms.txt, llms-full.txt, feed.xml, manifest, icons, 404
 // Usage: node build.mjs [--drafts]
 import fs from 'node:fs';
@@ -55,7 +57,7 @@ const UI = {
     share: 'Share this article', shareProfile: 'Share this profile', copy: 'Copy link', more: 'More options', copied: 'Link copied',
     bio: 'Software Architect, AI Builder and CTO at IndiqAI. I write about what I build every week with automation and AI.',
     aboutLink: 'About me', related: 'Keep reading', prev: 'Previous', next: 'Next', rss: 'RSS', allPosts: 'See all articles',
-    empty: '<b>The first article is coming soon.</b> Subscribe to the <a href="/blog/feed.xml" style="color:var(--accent);text-decoration:underline">RSS feed</a> to get it.',
+    empty: '<b>The first article is coming soon.</b> Subscribe to the <a href="/en/blog/feed.xml" style="color:var(--accent);text-decoration:underline">RSS feed</a> to get it.',
     updated: 'Updated', skip: 'Skip to content', projects: 'Projects', contact: 'Contact', crumbsHome: 'Home',
     callout: { tip: 'Tip', info: 'Note', note: 'Note', warn: 'Heads up', success: 'Result' },
     play: 'Play', xpost: 'View post on X', open: 'Open', readIn: 'Ler em português', langName: 'English',
@@ -109,7 +111,7 @@ const header = (lang, switchTo) => {
 <nav aria-label="Menu"><a href="${U.home}#projetos">${U.projects}</a><a href="${U.blog}" class="keep">Blog</a><a href="${U.home}#contato">${U.contact}</a>
 <span class="lang">${sw('pt')}${sw('en')}</span></nav></div></header>`;
 };
-const footer = () => `<footer><div class="wrap foot"><span>Gabriel Buarque · Natal, RN</span><span><a href="/blog/feed.xml">RSS</a> · <a href="/llms.txt">llms.txt</a> · nnex.us · © ${TODAY.slice(0, 4)}</span></div></footer>`;
+const footer = (lang = 'pt') => `<footer><div class="wrap foot"><span>Gabriel Buarque · Natal, RN</span><span><a href="${UI[lang].blog}feed.xml">RSS</a> · <a href="/llms.txt">llms.txt</a> · nnex.us · © ${TODAY.slice(0, 4)}</span></div></footer>`;
 
 function page({ noindex = false, lang, title, desc, url, alternates = {}, image = `${SITE}/og.png`, imageAlt = title, type = 'website', jsonld = '', css = '', body, script = '', extraHead = '' }) {
   const U = UI[lang];
@@ -118,7 +120,7 @@ function page({ noindex = false, lang, title, desc, url, alternates = {}, image 
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0e0e0d"><meta name="color-scheme" content="dark">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><meta name="author" content="Gabriel Buarque">
 <meta name="robots" content="${noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'}"><link rel="canonical" href="${url}">${alt}
-<link rel="alternate" type="application/rss+xml" title="Blog — Gabriel Buarque" href="${SITE}/blog/feed.xml"><link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt">
+<link rel="alternate" type="application/rss+xml" title="Blog — Gabriel Buarque" href="${SITE}${U.blog}feed.xml"><link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt">
 <meta property="og:type" content="${type}"><meta property="og:site_name" content="Gabriel Buarque"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${url}"><meta property="og:image" content="${image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${esc(imageAlt)}"><meta property="og:locale" content="${U.og}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${image}">
@@ -127,12 +129,12 @@ ${extraHead}
 <link rel="preload" href="/fonts/geist.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
 ${jsonld}
 <style>${SITE_CSS}${css}</style></head><body>
-<a class="skip" href="#conteudo">${U.skip}</a>${body}${footer()}${script}</body></html>`;
+<a class="skip" href="#conteudo">${U.skip}</a>${body}${footer(lang)}${script}</body></html>`;
 }
 
 const postRow = (p, lang, h = 'h2') => `<li class="post-row" data-tags="${esc(p.tags.map(slugify).join(','))}"><a href="${p.path}">
 <time datetime="${p.date}">${fmtShort(p.date, lang)}</time>
-<div><${h} lang="${p.lang === 'pt' ? 'pt-BR' : 'en'}">${esc(p.title)}</${h}><p lang="${p.lang === 'pt' ? 'pt-BR' : 'en'}">${esc(p.description)}</p>${p.tags.length ? `<div class="tags">${p.tags.map(t => `<span class="tag-chip">${esc(t)}</span>`).join('')}</div>` : ''}</div>
+<div><${h} lang="${p.lang === 'pt' ? 'pt-BR' : 'en'}">${p.lang !== lang ? `<span class="tag-chip" style="margin-right:8px;vertical-align:middle">${p.lang.toUpperCase()}</span>` : ''}${esc(p.title)}</${h}><p lang="${p.lang === 'pt' ? 'pt-BR' : 'en'}">${esc(p.description)}</p>${p.tags.length ? `<div class="tags">${p.tags.map(t => `<span class="tag-chip">${esc(t)}</span>`).join('')}</div>` : ''}</div>
 <span class="rt">${p.minutes} min</span></a></li>`;
 
 // ---------- posts ----------
@@ -141,15 +143,20 @@ async function loadPosts() {
   if (!fs.existsSync(dir)) return [];
   const cache = new Map();
   const posts = [];
-  for (const file of fs.readdirSync(dir).filter(f => f.endsWith('.md'))) {
-    const raw = fs.readFileSync(path.join(dir, file), 'utf8');
+  const files = [
+    ...fs.readdirSync(dir).filter(f => f.endsWith('.md')).map(f => ({ file: f, full: path.join(dir, f), folderLang: 'pt' })),
+    ...(fs.existsSync(path.join(dir, 'en')) ? fs.readdirSync(path.join(dir, 'en')).filter(f => f.endsWith('.md')).map(f => ({ file: f, full: path.join(dir, 'en', f), folderLang: 'en' })) : [])
+  ];
+  for (const { file, full, folderLang } of files) {
+    const raw = fs.readFileSync(full, 'utf8');
     const { data, content } = matter(raw);
     const isTemplate = file.startsWith('_');
     if ((data.draft || isTemplate) && !DRAFTS) continue;
     const date = data.date instanceof Date ? data.date.toISOString().slice(0, 10) : String(data.date || TODAY).slice(0, 10);
     const updated = data.updated ? (data.updated instanceof Date ? data.updated.toISOString().slice(0, 10) : String(data.updated).slice(0, 10)) : null;
     const slug = slugify(data.slug || file.replace(/^_/, '').replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, ''));
-    const lang = data.lang === 'en' ? 'en' : 'pt';
+    const lang = data.lang ? (data.lang === 'en' ? 'en' : 'pt') : folderLang;
+    const base = lang === 'en' ? '/en/blog/' : '/blog/';
     for (const k of ['title', 'description']) if (!data[k]) throw new Error(`${file}: frontmatter "${k}" is required`);
     await prefetch(content, cache);
     const r = render(content, { cache, root: ROOT, L: UI[lang] });
@@ -160,22 +167,31 @@ async function loadPosts() {
       cover: data.cover || null, coverAlt: data.cover_alt || data.title, coverCaption: data.cover_caption || '',
       audio: data.audio || null, translation: data.translation ? slugify(data.translation) : null,
       draft: !!data.draft || isTemplate, noindex: !!data.noindex,
-      path: `/blog/${slug}/`, url: `${SITE}/blog/${slug}/`, image: `${SITE}/blog/${slug}/og.png`
+      path: `${base}${slug}/`, url: `${SITE}${base}${slug}/`, image: `${SITE}${base}${slug}/og.png`, dir: `${base.slice(1)}${slug}`, mdPath: `${base}${slug}.md`
     });
   }
   const slugs = new Set();
-  for (const p of posts) { if (slugs.has(p.slug)) throw new Error(`duplicate slug: ${p.slug}`); slugs.add(p.slug); }
+  for (const p of posts) { const k = p.lang + ':' + p.slug; if (slugs.has(k)) throw new Error(`duplicate slug: ${k}`); slugs.add(k); }
+  // link translations both ways ("translation:" on one side is enough)
+  for (const p of posts) if (p.translation) {
+    const t = posts.find(x => x.lang !== p.lang && x.slug === p.translation);
+    if (!t) console.warn(`! ${p.file}: translation "${p.translation}" not found`);
+    else { p.tr = t; if (!t.tr) t.tr = p; }
+  }
+  for (const p of posts) if (!p.tr && !p.draft) console.warn(`! ${p.file}: no ${p.lang === 'pt' ? 'English' : 'Portuguese'} version yet`);
   return posts.sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
 }
 
 async function buildPost(p, posts) {
   const lang = p.lang, U = UI[lang];
-  const tr = p.translation && posts.find(x => x.slug === p.translation);
+  const tr = p.tr;
+  const same = posts.filter(x => x.lang === lang);
   const switchTo = { pt: lang === 'pt' ? p.path : (tr ? tr.path : '/blog/'), en: lang === 'en' ? p.path : (tr ? tr.path : '/en/blog/') };
-  const alternates = tr ? { [lang === 'pt' ? 'pt-BR' : 'en']: p.url, [tr.lang === 'pt' ? 'pt-BR' : 'en']: tr.url } : {};
-  const idx = posts.indexOf(p), newer = posts[idx - 1], older = posts[idx + 1];
-  const related = posts.filter(x => x !== p && x.tags.some(t => p.tags.includes(t))).slice(0, 3);
-  const more = (related.length ? related : posts.filter(x => x !== p).slice(0, 3));
+  const ptUrl = lang === 'pt' ? p.url : tr?.url, enUrl = lang === 'en' ? p.url : tr?.url;
+  const alternates = tr ? { 'pt-BR': ptUrl, en: enUrl, 'x-default': ptUrl } : {};
+  const idx = same.indexOf(p), newer = same[idx - 1], older = same[idx + 1];
+  const related = same.filter(x => x !== p && x.tags.some(t => p.tags.includes(t))).slice(0, 3);
+  const more = (related.length ? related : same.filter(x => x !== p).slice(0, 3));
   const blogHome = lang === 'en' ? '/en/blog/' : '/blog/';
 
   const jsonld = ld({
@@ -184,7 +200,7 @@ async function buildPost(p, posts) {
         '@type': 'BlogPosting', '@id': `${p.url}#article`, mainEntityOfPage: p.url, url: p.url, headline: p.title, description: p.description,
         datePublished: p.date, dateModified: p.updated || p.date, inLanguage: lang === 'pt' ? 'pt-BR' : 'en',
         author: { '@id': `${SITE}/#person` }, publisher: { '@id': `${SITE}/#person` }, image: p.image,
-        keywords: p.tags.join(', '), wordCount: p.words, timeRequired: `PT${p.minutes}M`, isPartOf: { '@id': `${SITE}/blog/#blog` },
+        keywords: p.tags.join(', '), wordCount: p.words, timeRequired: `PT${p.minutes}M`, isPartOf: { '@id': `${SITE}${blogHome}#blog` },
         ...(p.audio ? { audio: { '@type': 'AudioObject', contentUrl: new URL(p.audio, SITE).href, name: p.title, inLanguage: lang === 'pt' ? 'pt-BR' : 'en' } } : {}),
         speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.article-head h1', '.article-head .dek', '.tldr'] }
       },
@@ -220,27 +236,30 @@ ${more.length ? `<section class="more"><div class="wrap"><h2>${U.related}</h2><u
 <div class="pn">${newer ? `<a href="${newer.path}" class="next" style="grid-column:2"><small>${U.next} →</small>${esc(newer.title)}</a>` : ''}${older ? `<a href="${older.path}" style="grid-column:1;grid-row:1"><small>← ${U.prev}</small>${esc(older.title)}</a>` : ''}</div></div></section>` : ''}
 </main>`;
 
-  write(`blog/${p.slug}/index.html`, await page({
+  write(`${p.dir}/index.html`, await page({
     noindex: p.noindex, lang, title: `${p.title} — Gabriel Buarque`, desc: p.description, url: p.url, alternates, image: p.image, imageAlt: p.title, type: 'article', jsonld, css: BLOG_CSS, body,
     script: `<script>${BLOG_JS}</script>`,
     extraHead: `<meta property="article:published_time" content="${p.date}"><meta property="article:modified_time" content="${p.updated || p.date}"><meta property="article:author" content="${SITE}/">${p.tags.map(t => `<meta property="article:tag" content="${esc(t)}">`).join('')}`
   }));
-  write(`blog/${p.slug}.md`, `# ${p.title}\n\n> ${p.description}\n\nAuthor: Gabriel Buarque · Published: ${p.date}${p.updated ? ` · Updated: ${p.updated}` : ''} · URL: ${p.url}\n\n${p.summary.length ? p.summary.map(s => `- ${s}`).join('\n') + '\n\n' : ''}${p.raw.trim()}\n`);
-  write(`blog/${p.slug}/og.png`, await postOG({ title: p.title, date: fmtShort(p.date, lang), minutes: p.minutes, tags: p.tags, L: { min: lang === 'pt' ? 'min' : 'min' } }));
+  write(p.mdPath.slice(1), `# ${p.title}\n\n> ${p.description}\n\nAuthor: Gabriel Buarque · Published: ${p.date}${p.updated ? ` · Updated: ${p.updated}` : ''} · URL: ${p.url}\n\n${p.summary.length ? p.summary.map(s => `- ${s}`).join('\n') + '\n\n' : ''}${p.raw.trim()}\n`);
+  write(`${p.dir}/og.png`, await postOG({ title: p.title, date: fmtShort(p.date, lang), minutes: p.minutes, tags: p.tags, L: { min: lang === 'pt' ? 'min' : 'min' } }));
 }
 
-async function buildBlogIndex(lang, posts) {
+const forLang = (posts, lang) => posts.filter(p => p.lang === lang || !p.tr);
+
+async function buildBlogIndex(lang, allPosts) {
   const U = UI[lang], url = `${SITE}${U.blog}`;
+  const posts = forLang(allPosts, lang);
   const tags = [...new Set(posts.flatMap(p => p.tags))];
   const body = `${header(lang, { pt: '/blog/', en: '/en/blog/' })}<main id="conteudo">
 <div class="wrap"><div class="blog-hero"><div class="tag">Blog · ${lang === 'pt' ? 'automações · IA · engenharia' : 'automation · AI · engineering'}</div>
 <h1>${U.blogH1}</h1><p>${U.blogDesc}</p>
-<div class="row"><a class="btn" href="/blog/feed.xml">${U.rss} ↗</a></div></div>
+<div class="row"><a class="btn" href="${U.blog}feed.xml">${U.rss} ↗</a></div></div>
 ${posts.length ? `${tags.length > 1 ? `<div class="filters" role="group" aria-label="Tags"><button type="button" data-tag="*" aria-pressed="true">${U.all}</button>${tags.map(t => `<button type="button" data-tag="${esc(slugify(t))}" aria-pressed="false">${esc(t)}</button>`).join('')}</div>` : ''}
 <ul class="posts">${posts.map(p => postRow(p, lang)).join('')}</ul>` : `<div class="empty">${U.empty}</div>`}
 <div style="height:96px"></div></div></main>`;
   const jsonld = ld({ '@graph': [
-    { '@type': 'Blog', '@id': `${SITE}/blog/#blog`, url, name: U.blogTitle, description: U.blogDesc, inLanguage: lang === 'pt' ? 'pt-BR' : 'en', author: { '@id': `${SITE}/#person` },
+    { '@type': 'Blog', '@id': `${url}#blog`, url, name: U.blogTitle, description: U.blogDesc, inLanguage: lang === 'pt' ? 'pt-BR' : 'en', author: { '@id': `${SITE}/#person` },
       blogPost: posts.slice(0, 20).map(p => ({ '@type': 'BlogPosting', headline: p.title, url: p.url, datePublished: p.date, description: p.description })) },
     PERSON] });
   write(`${U.blog.slice(1)}index.html`, await page({
@@ -253,9 +272,9 @@ ${posts.length ? `${tags.length > 1 ? `<div class="filters" role="group" aria-la
 async function buildHome(lang, posts) {
   const U = UI[lang], url = `${SITE}${U.home}`;
   const shareText = 'Gabriel Buarque — Software Architect · AI Builder · CTO';
-  const latest = posts.slice(0, 3);
+  const latest = forLang(posts, lang).slice(0, 3);
   const blogHome = latest.length
-    ? `<ul class="posts home-posts">${latest.map(p => postRow(p, lang, 'h3')).join('')}</ul><div class="home-blog-foot"><a class="btn" href="${U.blog}">${U.allPosts} →</a><a class="btn" href="/blog/feed.xml">RSS ↗</a></div>`
+    ? `<ul class="posts home-posts">${latest.map(p => postRow(p, lang, 'h3')).join('')}</ul><div class="home-blog-foot"><a class="btn" href="${U.blog}">${U.allPosts} →</a><a class="btn" href="${U.blog}feed.xml">RSS ↗</a></div>`
     : `<div class="empty">${U.empty}</div>`;
   let html = read('src/index.html')
     .replaceAll('%CSS%', SITE_CSS + BLOG_CSS.slice(BLOG_CSS.indexOf('/* ---------- blog index ---------- */'), BLOG_CSS.indexOf('/* ---------- article ---------- */')) + '.home-posts .post-row a{grid-template-columns:140px 1fr auto}.home-blog-foot{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}.tags{display:flex;gap:6px;flex-wrap:wrap}.tag-chip{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:3px 10px}@media (max-width:700px){.post-row a,.home-posts .post-row a{grid-template-columns:1fr;gap:6px}.post-row .rt{display:none}}')
@@ -302,14 +321,14 @@ function seoFiles(allPosts) {
     { loc: `${SITE}/en/`, alt: { 'pt-BR': `${SITE}/`, en: `${SITE}/en/`, 'x-default': `${SITE}/` }, lastmod: TODAY, pr: '0.9' },
     { loc: `${SITE}/blog/`, alt: { 'pt-BR': `${SITE}/blog/`, en: `${SITE}/en/blog/`, 'x-default': `${SITE}/blog/` }, lastmod: posts[0]?.date || TODAY, pr: '0.8' },
     { loc: `${SITE}/en/blog/`, alt: { 'pt-BR': `${SITE}/blog/`, en: `${SITE}/en/blog/`, 'x-default': `${SITE}/blog/` }, lastmod: posts[0]?.date || TODAY, pr: '0.6' },
-    ...posts.map(p => ({ loc: p.url, lastmod: p.updated || p.date, pr: '0.7' }))
+    ...posts.map(p => ({ loc: p.url, lastmod: p.updated || p.date, pr: '0.7', alt: p.tr && !p.tr.noindex ? { 'pt-BR': p.lang === 'pt' ? p.url : p.tr.url, en: p.lang === 'en' ? p.url : p.tr.url, 'x-default': p.lang === 'pt' ? p.url : p.tr.url } : null }))
   ];
   write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.map(u => `  <url><loc>${u.loc}</loc>${u.alt ? Object.entries(u.alt).map(([l, h]) => `<xhtml:link rel="alternate" hreflang="${l}" href="${h}"/>`).join('') : ''}<lastmod>${u.lastmod}</lastmod><priority>${u.pr}</priority></url>`).join('\n')}\n</urlset>\n`);
 
   const x = s => esc(s);
-  write('blog/feed.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">\n<channel>\n<title>Blog — Gabriel Buarque</title>\n<link>${SITE}/blog/</link>\n<atom:link href="${SITE}/blog/feed.xml" rel="self" type="application/rss+xml"/>\n<description>${x(UI.pt.blogDesc)}</description>\n<language>pt-BR</language>\n<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>\n${posts.slice(0, 30).map(p => `<item><title>${x(p.title)}</title><link>${p.url}</link><guid isPermaLink="true">${p.url}</guid><pubDate>${new Date(p.date + 'T12:00:00Z').toUTCString()}</pubDate><description>${x(p.description)}</description>${p.tags.map(t => `<category>${x(t)}</category>`).join('')}<content:encoded><![CDATA[${p.html.replace(/]]>/g, ']]]]><![CDATA[>')}]]></content:encoded></item>`).join('\n')}\n</channel>\n</rss>\n`);
+  for (const lang of ['pt', 'en']) write(`${UI[lang].blog.slice(1)}feed.xml`, `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">\n<channel>\n<title>Blog — Gabriel Buarque</title>\n<link>${SITE}${UI[lang].blog}</link>\n<atom:link href="${SITE}${UI[lang].blog}feed.xml" rel="self" type="application/rss+xml"/>\n<description>${x(UI[lang].blogDesc)}</description>\n<language>${lang === 'pt' ? 'pt-BR' : 'en'}</language>\n<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>\n${forLang(posts, lang).slice(0, 30).map(p => `<item><title>${x(p.title)}</title><link>${p.url}</link><guid isPermaLink="true">${p.url}</guid><pubDate>${new Date(p.date + 'T12:00:00Z').toUTCString()}</pubDate><description>${x(p.description)}</description>${p.tags.map(t => `<category>${x(t)}</category>`).join('')}<content:encoded><![CDATA[${p.html.replace(/]]>/g, ']]]]><![CDATA[>')}]]></content:encoded></item>`).join('\n')}\n</channel>\n</rss>\n`);
 
-  const postList = posts.length ? posts.map(p => `- [${p.title}](${SITE}/blog/${p.slug}.md): ${p.description} (${p.date}, ${p.lang === 'pt' ? 'pt-BR' : 'en'})`).join('\n') : '- No posts yet.';
+  const postList = posts.length ? posts.map(p => `- [${p.title}](${SITE}${p.mdPath}): ${p.description} (${p.date}, ${p.lang === 'pt' ? 'pt-BR' : 'en'})`).join('\n') : '- No posts yet.';
   const llms = read('content/llms.md').replace('{{POSTS}}', postList).replace('{{UPDATED}}', TODAY);
   write('llms.txt', llms);
   write('llms-full.txt', `${read('content/profile.md').trim()}\n\n---\n\n# Blog posts\n\n${posts.map(p => `## ${p.title}\n\nURL: ${p.url} · Published: ${p.date} · Language: ${p.lang}\n\n> ${p.description}\n\n${p.raw.trim()}`).join('\n\n---\n\n') || 'No posts yet.'}\n`);
