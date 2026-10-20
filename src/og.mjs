@@ -38,6 +38,12 @@ function graphSVG(w, hgt, scale) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${hgt}" viewBox="0 0 ${w} ${hgt}"><defs><radialGradient id="g"><stop offset="0" stop-color="#f28b54" stop-opacity=".35"/><stop offset="1" stop-color="#f28b54" stop-opacity="0"/></radialGradient></defs><circle cx="${w / 2}" cy="${hgt / 2}" r="${scale * 1.1}" fill="url(#g)"/>${lines}${dots}</svg>`;
   return 'data:image/svg+xml;base64,' + Buffer.from(svg).toString('base64');
 }
+const BRAIN = (() => {
+  const b64 = fs.readFileSync(new URL('../assets/brand/brain.png', import.meta.url)).toString('base64');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512"><image width="512" height="512" xlink:href="data:image/png;base64,${b64}"/></svg>`;
+  return 'data:image/png;base64,' + new Resvg(svg, { fitTo: { mode: 'width', value: 160 } }).render().asPng().toString('base64');
+})();
+const brain = size => ({ type: 'img', props: { src: BRAIN, width: size, height: size, style: { width: size, height: size } } });
 const GRAPH_HOME = graphSVG(640, 640, 150);
 const GRAPH_POST = graphSVG(520, 520, 120);
 
@@ -58,7 +64,7 @@ export function homeOG() {
         h('div', { fontSize: 124, lineHeight: 1, fontFamily: 'Instrument Serif', fontStyle: 'italic', color: '#f28b54', letterSpacing: -2 }, 'Buarque'),
         h('div', { marginTop: 28, fontSize: 30, color: '#c9c6be', maxWidth: 620, lineHeight: 1.3 }, 'Software, AI agents & automations that solve real problems.')
       ),
-      h('div', { fontFamily: 'Geist Mono', fontSize: 22, color: '#9a978f' }, 'nnex.us')
+      h('div', { alignItems: 'center', gap: 12, fontFamily: 'Geist Mono', fontSize: 24, color: '#c9c6be' }, brain(40), 'gb/nnex.us')
     )
   ));
 }
@@ -69,14 +75,14 @@ export function postOG({ title, date, minutes, tags = [], L }) {
     { type: 'img', props: { src: GRAPH_POST, width: 520, height: 520, style: { position: 'absolute', right: -150, top: 55, opacity: .9 } } },
     h('div', { position: 'absolute', left: 0, top: 0, width: 8, height: 630, background: '#f28b54' }),
     h('div', { flexDirection: 'column', justifyContent: 'space-between', padding: '60px 72px', width: '100%', height: '100%' },
-      h('div', { fontFamily: 'Geist Mono', fontSize: 22, color: '#f28b54', letterSpacing: 1 }, 'nnex.us/blog'),
+      h('div', { fontFamily: 'Geist Mono', fontSize: 22, color: '#f28b54', letterSpacing: 1 }, 'gb/nnex.us/blog'),
       h('div', { flexDirection: 'column', maxWidth: 860 },
         h('div', { fontSize: size, fontWeight: 600, lineHeight: 1.08, letterSpacing: -2 }, title),
         tags.length ? h('div', { marginTop: 26, gap: 10 }, ...tags.slice(0, 3).map(t => h('div', { fontFamily: 'Geist Mono', fontSize: 20, color: '#c9c6be', border: '1px solid #3a3a35', borderRadius: 999, padding: '6px 16px' }, t))) : null
       ),
       h('div', { justifyContent: 'space-between', alignItems: 'center', fontSize: 24 },
         h('div', { alignItems: 'center', gap: 14 },
-          h('div', { width: 44, height: 44, borderRadius: 22, background: '#f28b54', color: '#0e0e0d', fontFamily: 'Geist Mono', fontSize: 18, alignItems: 'center', justifyContent: 'center' }, 'GB'),
+          brain(48),
           h('div', {}, 'Gabriel Buarque')
         ),
         h('div', { fontFamily: 'Geist Mono', fontSize: 20, color: '#9a978f' }, `${date} · ${minutes} ${L.min}`)

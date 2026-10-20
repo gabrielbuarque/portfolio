@@ -22,6 +22,7 @@ const SITE = 'https://nnex.us';
 const DRAFTS = process.argv.includes('--drafts');
 const TODAY = new Date().toISOString().slice(0, 10);
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
+const read64 = p => fs.readFileSync(path.join(ROOT, p)).toString('base64');
 const write = (p, data) => { const f = path.join(OUT, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, data); };
 
 const EN = JSON.parse(read('src/en.json'));
@@ -104,7 +105,7 @@ const header = (lang, switchTo) => {
   const U = UI[lang], other = U.other;
   const sw = l => `<a href="${switchTo[l]}" hreflang="${l === 'pt' ? 'pt-BR' : 'en'}" lang="${l === 'pt' ? 'pt-BR' : 'en'}" title="${UI[l].langName}"${l === lang ? ' aria-current="page"' : ''}>${l.toUpperCase()}</a>`;
   return `<header><div class="wrap nav">
-<a href="${U.home}" class="logo" aria-label="Gabriel Buarque">gb<i>/</i>nnex.us</a>
+<a href="${U.home}" class="logo" aria-label="Gabriel Buarque"><img src="/logo.png" alt="" width="24" height="24"><span>gb<i>/</i>nnex.us</span></a>
 <nav aria-label="Menu"><a href="${U.home}#projetos">${U.projects}</a><a href="${U.blog}" class="keep">Blog</a><a href="${U.home}#contato">${U.contact}</a>
 <span class="lang">${sw('pt')}${sw('en')}</span></nav></div></header>`;
 };
@@ -122,7 +123,7 @@ function page({ lang, title, desc, url, alternates = {}, image = `${SITE}/og.png
 <meta property="og:url" content="${url}"><meta property="og:image" content="${image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${esc(imageAlt)}"><meta property="og:locale" content="${U.og}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${image}">
 ${extraHead}
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"><link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/fonts/geist.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
 ${jsonld}
 <style>${SITE_CSS}${css}</style></head><body>
@@ -315,9 +316,21 @@ function seoFiles(posts) {
 
 // ---------- icons ----------
 function icons() {
-  const svg = read('public/favicon.svg');
-  const opts = w => ({ fitTo: { mode: 'width', value: w }, font: { fontFiles, loadSystemFonts: false, defaultFontFamily: 'Geist Mono' } });
-  for (const [name, w] of [['favicon-32.png', 32], ['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512]]) write(name, new Resvg(svg, opts(w)).render().asPng());
+  // every icon comes from assets/brand/brain.png (transparent PNG)
+  const brain = read64('assets/brand/brain.png');
+  const wrap = (size, { bg = null, pad = 0, radius = 0 } = {}) => {
+    const inner = size - pad * 2;
+    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${bg ? `<rect width="${size}" height="${size}" rx="${radius}" fill="${bg}"/>` : ''}<image x="${pad}" y="${pad}" width="${inner}" height="${inner}" xlink:href="data:image/png;base64,${brain}"/></svg>`;
+  };
+  const png = (svg, w) => new Resvg(svg, { fitTo: { mode: 'width', value: w } }).render().asPng();
+  write('logo.png', png(wrap(512), 64));
+  write('favicon-32.png', png(wrap(512), 32));
+  write('favicon-48.png', png(wrap(512), 48));
+  write('apple-touch-icon.png', png(wrap(512, { bg: '#0e0e0d', pad: 64 }), 180));
+  write('icon-192.png', png(wrap(512, { bg: '#0e0e0d', pad: 56 }), 192));
+  write('icon-512.png', png(wrap(512, { bg: '#0e0e0d', pad: 56 }), 512));
+  const small = png(wrap(512), 96).toString('base64');
+  write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 96 96"><image width="96" height="96" xlink:href="data:image/png;base64,${small}"/></svg>`);
 }
 
 // ---------- run ----------
