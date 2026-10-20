@@ -47,10 +47,11 @@
 <body>
   <a class="skip" href="#conteudo" data-i18n="skip">Pular para o conteúdo</a>
 
-  <header>
+  <header class="site-header">
     <div class="wrap nav">
       <a href="%URL%" class="logo" aria-label="Gabriel Buarque — início" data-i18n-attr="aria-label:nav.home"><img src="/logo.png" alt="" width="24" height="24"><span>gb<i>/</i>nnex.us</span></a>
-      <nav aria-label="Menu principal" data-i18n-attr="aria-label:nav.label">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><span class="nav-toggle-label">Menu</span><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span></span></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Menu principal" data-i18n-attr="aria-label:nav.label">
         <a href="#projetos" data-i18n="nav.work">Projetos</a>
         <a href="#experiencia" data-i18n="nav.xp">Experiência</a>
         <a href="#github">GitHub</a>

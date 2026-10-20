@@ -106,9 +106,10 @@ const shareHTML = (url, text, lang, label) => {
 const header = (lang, switchTo) => {
   const U = UI[lang], other = U.other;
   const sw = l => `<a href="${switchTo[l]}" hreflang="${l === 'pt' ? 'pt-BR' : 'en'}" lang="${l === 'pt' ? 'pt-BR' : 'en'}" title="${UI[l].langName}"${l === lang ? ' aria-current="page"' : ''}>${l.toUpperCase()}</a>`;
-  return `<header><div class="wrap nav">
+  return `<header class="site-header"><div class="wrap nav">
 <a href="${U.home}" class="logo" aria-label="Gabriel Buarque"><img src="/logo.png" alt="" width="24" height="24"><span>gb<i>/</i>nnex.us</span></a>
-<nav aria-label="Menu"><a href="${U.home}#projetos">${U.projects}</a><a href="${U.blog}" class="keep">Blog</a><a href="${U.home}#contato">${U.contact}</a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden><span class="nav-toggle-label">Menu</span><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span></span></button>
+<nav class="primary-nav" id="primary-nav" aria-label="${lang === 'en' ? 'Main menu' : 'Menu principal'}"><a href="${U.home}#projetos">${U.projects}</a><a href="${U.blog}" class="keep">Blog</a><a href="${U.home}#contato">${U.contact}</a>
 <span class="lang">${sw('pt')}${sw('en')}</span></nav></div></header>`;
 };
 const footer = (lang = 'pt') => `<footer><div class="wrap foot"><span>Gabriel Buarque · Natal, RN</span><span><a href="${UI[lang].blog}feed.xml">RSS</a> · <a href="/llms.txt">llms.txt</a> · nnex.us · © ${TODAY.slice(0, 4)}</span></div></footer>`;
@@ -129,7 +130,7 @@ ${extraHead}
 <link rel="preload" href="/fonts/geist.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
 ${jsonld}
 <style>${SITE_CSS}${css}</style></head><body>
-<a class="skip" href="#conteudo">${U.skip}</a>${body}${footer(lang)}${script}</body></html>`;
+<a class="skip" href="#conteudo">${U.skip}</a>${body}${footer(lang)}${script}<script>${NAV_JS}</script></body></html>`;
 }
 
 const postRow = (p, lang, h = 'h2') => `<li class="post-row" data-tags="${esc(p.tags.map(slugify).join(','))}"><a href="${p.path}">
@@ -288,7 +289,7 @@ async function buildHome(lang, posts) {
     .replaceAll('%URL%', url)
     .replace('%HERO_SVG%', HERO_SVG)
     .replaceAll('%NODES%', GRAPH.pos.length).replaceAll('%EDGES%', GRAPH.edges.length)
-    .replace('%SCRIPTS%', `<script>${APP_JS}</script>${process.env.NOGRAPH ? "" : `<script>${GRAPH_JS}</script>`}`);
+    .replace('%SCRIPTS%', `<script>${APP_JS}</script><script>${NAV_JS}</script>${process.env.NOGRAPH ? "" : `<script>${GRAPH_JS}</script>`}`);
 
   const doc = parse(html, { comment: true });
   if (lang === 'en') {
@@ -354,7 +355,7 @@ function icons() {
 }
 
 // ---------- run ----------
-let APP_JS, GRAPH_JS, BLOG_JS, GRAPH, HERO_SVG;
+let APP_JS, GRAPH_JS, BLOG_JS, NAV_JS, GRAPH, HERO_SVG;
 const t0 = Date.now();
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(path.join(ROOT, 'public'), OUT, { recursive: true });
@@ -364,6 +365,7 @@ GRAPH = memoryGraph();
 GRAPH_JS = (await minifyJS(read('src/graph.js').replace('__GRAPH__', JSON.stringify(GRAPH)))).code;
 HERO_SVG = graphSVG({ attrs: ' class="hero-static" aria-hidden="true" focusable="false"' });
 BLOG_JS = (await minifyJS(read('src/blog.js'))).code;
+NAV_JS = (await minifyJS(read('src/nav.js'))).code;
 
 let AVATAR_SMALL = AVATAR_REMOTE + '&s=128';
 try {
