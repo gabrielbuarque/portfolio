@@ -8,7 +8,6 @@ summary:
   - "In a study of about 1,000 students, unrestricted AI raised practice scores by 48% and lowered exam scores without it by 17%."
   - "What improves work with agents the most is how we review, test and validate changes before accepting them."
 translation: use-a-ia-para-executar
-noindex: true
 ---
 
 Someone I know was great at writing essays. Top grades, sometimes a perfect score. After a long stretch of using AI to write almost everything, she sat an exam and got a bad grade.

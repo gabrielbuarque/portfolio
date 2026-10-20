@@ -7,7 +7,6 @@ summary:
   - "Um PDF longo pode ocupar quase todo o contexto de uma conversa antes do trabalho começar, e a qualidade cai conforme a janela enche."
   - "O método: uma conversa lê e resume; cada tarefa ganha um chat novo só com o resumo e o que ela precisa."
   - "Uma tarefa travada há 7 horas foi resolvida em 30 a 40 minutos, com a mesma IA, só mudando a forma de organizar o contexto."
-noindex: true
 ---
 
 Uma pessoa próxima estava havia mais de 7 horas tentando preencher o formulário de um edital com ajuda da IA. Com o mesmo modelo e o mesmo documento, terminamos em 30 a 40 minutos. A diferença não foi a ferramenta. Foi o contexto.

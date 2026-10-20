@@ -8,7 +8,6 @@ summary:
   - "The method: one conversation reads and summarizes; every task gets a fresh chat with only the summary and what it needs."
   - "A task that had been stuck for 7 hours was done in 30 to 40 minutes, with the same AI, just by organizing the context differently."
 translation: um-chat-por-tarefa
-noindex: true
 ---
 
 Someone close to me had spent more than 7 hours trying to fill out an application form with AI. Same model, same document, and we finished in 30 to 40 minutes. The difference wasn't the tool. It was the context.

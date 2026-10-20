@@ -7,7 +7,6 @@ summary:
   - "A IA acelera a execução, mas quem para de praticar perde a habilidade que precisa para julgar o resultado."
   - "Um estudo com cerca de 1.000 alunos: com IA livre, o desempenho subiu 48% na prática e caiu 17% na prova sem ela."
   - "O que mais melhora o trabalho com agentes é a forma como revisamos, testamos e validamos antes de aceitar."
-noindex: true
 ---
 
 Uma pessoa que eu conheço era ótima em redação. Tirava as melhores notas, às vezes nota máxima. Depois de um bom tempo usando IA para escrever quase tudo, ela foi fazer uma prova e tirou uma nota ruim.
