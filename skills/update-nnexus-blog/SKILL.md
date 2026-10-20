@@ -127,6 +127,7 @@ Ele escreve como fala quando está explicando algo para um colega técnico: dire
 Um artigo, **uma ideia central** (a virada da seção 3). Se a semana teve vários assuntos:
 - Se eles se conectam (ex.: "automatizei o onboarding e isso mudou como uso agentes"), vira um artigo com seções.
 - Se não se conectam, o principal vira o artigo e o resto vai para o backlog, ou para uma seção curta "Outras coisas que fiz" se tiver valor por si.
+- Se o mesmo áudio render **dois artigos**, trate-os como uma série: o primeiro termina apontando para o segundo (bloco `callout` com o link) e o segundo retoma o primeiro no fechamento. Uma fonte usada nos dois aparece completa em um só; o outro remete ao primeiro em vez de repetir. Publique um por semana.
 
 **Cadência:** o blog é semanal. A entrega padrão por áudio é **1 artigo (em pt-BR e inglês) + os posts das redes que derivam dele** (seção 15). Não produza vários artigos de um áudio só para "ter estoque"; ângulos extras vão para o backlog.
 
@@ -179,6 +180,8 @@ Abertura (2–3 parágrafos curtos): gancho (de preferência uma frase dele), o 
 ## O que eu aprendi      ← 2–4 aprendizados práticos
 Fechamento: próximo passo ou pergunta aberta (1 parágrafo). Opcional: ```cta
 ```
+
+**Progressão (causalidade narrativa).** Cada seção tem que ser consequência da anterior, não só mais uma ideia sobre o mesmo tema. Antes de escrever, monte a cadeia em uma frase por seção: "A acontece, por isso B; mas B exige C; e C só funciona se D". Se uma seção não cabe na cadeia, ela sai ou vai para o backlog. A última frase de cada seção prepara a próxima, e a ponte tem que desenvolver a ideia, não ser só uma frase de transição colada. Quando houver um diagrama, use-o como a espinha do texto: as seções seguem as etapas dele.
 
 Adapte os subtítulos ao assunto; eles devem dizer algo ("Por que tirei o agente do loop de aprovação" em vez de "Desenvolvimento"). Use de 3 a 6 seções `##`. Com 3 ou mais, o índice lateral aparece sozinho.
 
@@ -354,6 +357,7 @@ Rode antes de mostrar a prévia. Qualquer item marcado reprova o rascunho: corri
 **Fidelidade**
 - [ ] Algum fato, número, nome ou detalhe de história não veio da transcrição nem foi confirmado pelo Gabriel
 - [ ] O artigo tem mais de uma lição central
+- [ ] Alguma seção não decorre da anterior (o leitor precisa descobrir sozinho por que o assunto mudou)
 - [ ] Não se encaixa em nenhum pilar da seção 2
 
 **Filtro (seção 4)**

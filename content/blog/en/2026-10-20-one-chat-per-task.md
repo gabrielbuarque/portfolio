@@ -35,9 +35,11 @@ Neither study sets an exact point where quality falls off a cliff. But both poin
 
 It works the same way with people. If I hand someone a 70-page PDF and immediately start asking about different parts of it, expecting a perfect answer every time, nobody can do that. Our memory doesn't work like that. We don't remember every moment, we remember the important parts. That's why so many people study with flashcards: they keep the trigger, not the whole book.
 
+So the way out is to do with AI what we already do with our own memory: keep the essentials in a summary and go back to the source only when needed.
+
 ## The method: one conversation reads, others do the work
 
-What I did with her was separate reading from doing:
+That's what we did. We separated reading from doing:
 
 ```steps
 Summarize the call | In one conversation, the whole PDF goes in and a summary comes out: rules, deadlines, documents and criteria.
@@ -57,13 +59,15 @@ There's a bonus: you can work in parallel. While one chat sorts out the document
 If you've been on a task for a long time and the answers are getting worse, open a new chat and bring only the summary. If that fixes it, great. If it doesn't, then the problem is something else, and it's time to try a different approach.
 ```
 
-## Tell the AI how to check its own work
+## A clean chat only knows what you tell it
 
-Splitting conversations solves half of it. The other half is the request. If the AI doesn't know what the expected result is, it has no way to check whether it got there.
+Starting clean has a side most people miss: the new chat knows nothing beyond what you bring to it. It didn't see the PDF, it didn't see the other conversations, it doesn't know what you're trying to do. So the quality of the result now depends on two things: the summary you hand over and the request you make.
 
-So each chat got a goal you could verify: "list the required documents", "list the form fields", "for each field, give the answer and where it came from". One more thing helped: instead of typing, she said what she wanted out loud. I use Wispr Flow a lot to dictate. When we talk, we explain what we want better than we do in a short typed prompt.
+The request has to state the expected result in a way the AI itself can check. That's why each chat got a goal you could verify: "list the required documents", "list the form fields", "for each field, give the answer and where it came from".
 
-Review also works better when it starts clean. In a study with 150 errors planted in documents and code, a second review done in the same conversation caught fewer errors than a review done in a fresh session with no history (F1 of 21.7% versus 28.6%). It's a preprint, with a single model, but it points the same way ([Song, Cross-Context Review](https://arxiv.org/abs/2603.12123)).
+And to explain well what you want, talking usually works better than typing. When we type, we write a short prompt. When we talk, we give context without noticing: the why, what we already tried, what can't go wrong. That's what she did, into the microphone. I use Wispr Flow a lot to dictate for exactly that reason.
+
+With a clear goal in each chat, one step is left: checking. And the clean-chat logic shows up again here. In a study with 150 errors planted in documents and code, a second review done in the same conversation caught fewer errors than a review done in a fresh session with no history (F1 of 21.7% versus 28.6%). It's a preprint, with a single model, but it points the same way: whoever doesn't carry the history sees what slipped through more clearly ([Song, Cross-Context Review](https://arxiv.org/abs/2603.12123)).
 
 ## What I learned watching from the outside
 
@@ -71,4 +75,8 @@ For me, this is already a habit. I open a conversation, then another, and anothe
 
 > In the age of agents, plenty of people still use ChatGPT and Claude as if they were just text generators. They already drive browsers, run plugins and do a lot more.
 
-People who learn to organize context get a lot more out of the same tool. And they still need to review at the end: the AI might get it right the first time, but you only know if you check.
+People who learn to organize context get a lot more out of the same tool. But all of this ends in the same place: someone has to check the result. The AI might get it right the first time, but you only know if you check. And checking takes knowing what's right.
+
+```callout tip Next piece
+This one was about delegating better. In [Let AI do the work, not the learning](/en/blog/let-ai-do-the-work-not-the-learning/), I cover the other side: what you can't delegate without losing the ability to judge what AI hands you.
+```

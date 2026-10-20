@@ -34,9 +34,11 @@ Nenhum dos dois define um ponto exato em que a qualidade despenca. Mas os dois a
 
 É igual com uma pessoa. Se eu entrego um PDF de 70 páginas para alguém e logo em seguida começo a fazer perguntas sobre pontos diferentes, esperando qualidade perfeita em todas, ninguém consegue. A nossa memória não funciona assim. A gente não lembra de cada momento, lembra das partes importantes. É por isso que tanta gente estuda com flashcards: eles guardam o gatilho, não o livro inteiro.
 
+A saída, então, é fazer com a IA o que a gente já faz com a própria memória: guardar o essencial num resumo e voltar à fonte só quando precisa.
+
 ## O método: uma conversa lê, outras executam
 
-O que eu fiz com ela foi separar a leitura da execução:
+Foi isso que fizemos. Separamos a leitura da execução:
 
 ```steps
 Resumir o edital | Numa conversa, o PDF inteiro entra e sai um resumo com regras, prazos, documentos e critérios.
@@ -56,13 +58,15 @@ Tem um ganho extra: dá para trabalhar em paralelo. Enquanto um chat separa docu
 Se você está há muito tempo numa tarefa e as respostas começaram a piorar, abra um chat novo levando só o resumo. Se resolver, ótimo. Se não resolver, aí sim o problema é outro, e vale testar outra abordagem.
 ```
 
-## Diga como a IA confere se acertou
+## Um chat limpo só sabe o que você conta
 
-Separar conversas resolve metade. A outra metade é o pedido. Se a IA não sabe qual é o resultado esperado, ela não tem como conferir se chegou lá.
+Começar limpo tem um lado que pouca gente percebe: o chat novo não sabe nada além do que você leva para ele. Não viu o PDF, não viu as outras conversas, não sabe o que você está tentando fazer. Então a qualidade do resultado passa a depender de duas coisas: o resumo que você entrega e o pedido que você faz.
 
-Por isso cada chat recebeu um objetivo verificável: "liste os documentos exigidos", "liste os campos do formulário", "para cada campo, diga a resposta e de onde ela saiu". Outro detalhe que ajudou: em vez de digitar, ela falou o que queria no microfone. Eu uso muito o Wispr Flow para ditar. Falando, a gente explica melhor o que quer do que escrevendo um prompt curto.
+O pedido precisa dizer qual é o resultado esperado, de um jeito que a própria IA consiga conferir se chegou lá. Por isso cada chat recebeu um objetivo verificável: "liste os documentos exigidos", "liste os campos do formulário", "para cada campo, diga a resposta e de onde ela saiu".
 
-A revisão também se beneficia de começar limpa. Em um estudo com 150 erros inseridos em textos e código, uma segunda revisão feita na mesma conversa achou menos erros do que uma revisão feita numa sessão nova, sem o histórico (F1 de 21,7% contra 28,6%). É um preprint, com um modelo só, mas vai na mesma direção ([Song, Cross-Context Review](https://arxiv.org/abs/2603.12123)).
+E para explicar bem o que você quer, falar costuma funcionar melhor do que digitar. Quando a gente digita, escreve um prompt curto. Quando fala, dá contexto sem perceber: o porquê, o que já tentou, o que não pode dar errado. Foi o que ela fez, no microfone. Eu uso muito o Wispr Flow para ditar exatamente por isso.
+
+Com um objetivo claro em cada chat, sobra o último passo: conferir. E aqui a lógica do chat limpo aparece de novo. Em um estudo com 150 erros inseridos em textos e código, uma segunda revisão feita na mesma conversa achou menos erros do que uma revisão feita numa sessão nova, sem o histórico (F1 de 21,7% contra 28,6%). É um preprint, com um modelo só, mas vai na mesma direção: quem não carrega o histórico enxerga melhor o que passou ([Song, Cross-Context Review](https://arxiv.org/abs/2603.12123)).
 
 ## O que eu aprendi vendo de fora
 
@@ -70,4 +74,8 @@ Para mim isso já é hábito. Eu abro uma conversa, depois outra, e outra, o dia
 
 > Na era dos agentes, ainda tem muita gente usando o ChatGPT e o Claude como se fossem só geradores de texto. Eles já controlam navegadores, têm plugins, fazem muito mais.
 
-Quem aprende a organizar o contexto tira muito mais da mesma ferramenta. E continua precisando revisar no final: a IA pode até acertar de primeira, mas você só vai saber se conferir.
+Quem aprende a organizar o contexto tira muito mais da mesma ferramenta. Mas tudo isso termina no mesmo lugar: alguém precisa conferir o resultado. A IA pode até acertar de primeira, mas você só vai saber se conferir. E conferir exige saber o que está certo.
+
+```callout tip Próximo texto
+Aqui o assunto foi como delegar melhor. Em [Use a IA para executar, não para parar de aprender](/blog/use-a-ia-para-executar/), falo do outro lado: o que não dá para delegar sem perder a capacidade de julgar o que a IA entrega.
+```
